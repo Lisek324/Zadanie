@@ -8,5 +8,285 @@
         Title="MainWindow" Height="600" Width="1200">
     <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
+            <Button Width="100px" Height="25px" Margin="5px">Dodaj</Button>
+            <Button Width="100px" Height="25px" Margin="5px">Importuj</Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
+            <Button Width="100px" Height="25px" Margin="5px">Usuń</Button>
+            <Button Width="100px" Height="25px" Margin="5px">Eksportuj</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Width="200" Height="50">Wyszukaj</Button>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="4" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" >
+            <Button Width="100" Height="25" Margin="10">Sortuj od A do Z</Button>
+            <Button Width="100" Height="25" Margin="10">Sortuj po ID</Button>
+        </StackPanel>
+        
+
+        <TabControl Margin="0,0,0,75" Grid.ColumnSpan="4">
+            
+            <!--Uczniowie-->
+            <TabItem Header="Uczniowie">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imie" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Drugie imie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko panieńskie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imiona rodziców" Width="175"/>
+                        <TextBox Width="95" Height="20"/>
+                        <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
+                        <!--bruh-->
+                        <TextBox Width="95" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Data Urodzenia" Width="175"/>
+                        <DatePicker Width="200"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Pesel" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Zdjęcie" Width="175"/>
+                        <Button Width="100">Wybierz</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Płeć"  Width="175"/>
+                        <ComboBox Width="100">
+                            <ComboBoxItem  IsSelected="True">Wybierz płeć</ComboBoxItem>
+                            <ComboBoxItem>Kobieta</ComboBoxItem>
+                            <ComboBoxItem>Mężczyzna</ComboBoxItem>
+                            <ComboBoxItem>Inna</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Przynależność do klasy"  Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Przynależność do Grupy" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Przynależność do międzyklasy" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            
+            <!--Nauczyciele-->
+            <TabItem Header="Nauczyciele">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imie" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Drugie imie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko panieńskie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imiona rodziców" Width="175"/>
+                        <TextBox Width="95" Height="20"/>
+                        <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
+                        <!--bruh-->
+                        <TextBox Width="95" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Data Urodzenia" Width="175"/>
+                        <DatePicker Width="200"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Pesel" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Zdjęcie" Width="175"/>
+                        <Button Width="100">Wybierz</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Płeć"  Width="175"/>
+                        <ComboBox Width="100">
+                            <ComboBoxItem  IsSelected="True">Wybierz płeć</ComboBoxItem>
+                            <ComboBoxItem>Kobieta</ComboBoxItem>
+                            <ComboBoxItem>Mężczyzna</ComboBoxItem>
+                            <ComboBoxItem>Inna</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Wychowawstwo*"  Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Przedmioty nauczania" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Data zatrudnienia" Width="175"/>
+                        <DatePicker Width="200"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!--Personel-->
+            <TabItem Header="Personel szkolny">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imie" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Drugie imie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Nazwisko panieńskie*" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Imiona rodziców" Width="175"/>
+                        <TextBox Width="95" Height="20"/>
+                        <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
+                        <!--bruh-->
+                        <TextBox Width="95" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Data Urodzenia" Width="175"/>
+                        <DatePicker Width="200"></DatePicker>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Pesel" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Zdjęcie" Width="175"/>
+                        <Button Width="100">Wybierz</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Płeć"  Width="175"/>
+                        <ComboBox Width="100">
+                            <ComboBoxItem  IsSelected="True">Wybierz płeć</ComboBoxItem>
+                            <ComboBoxItem>Kobieta</ComboBoxItem>
+                            <ComboBoxItem>Mężczyzna</ComboBoxItem>
+                            <ComboBoxItem>Inna</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="inforamcje o etacie"  Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="opis stanowiska" Width="175"/>
+                        <TextBox Width="200" Height="20"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Text="Data zatrudnienia" Width="175"/>
+                        <DatePicker Width="200"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
