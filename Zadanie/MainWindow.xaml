@@ -82,7 +82,6 @@
                         <TextBlock Text="Imiona rodziców" Width="175"/>
                         <TextBox Width="95" Height="20"/>
                         <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
-                        <!--bruh-->
                         <TextBox Width="95" Height="20"/>
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -165,7 +164,6 @@
                         <TextBlock Text="Imiona rodziców" Width="175"/>
                         <TextBox Width="95" Height="20"/>
                         <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
-                        <!--bruh-->
                         <TextBox Width="95" Height="20"/>
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -248,7 +246,6 @@
                         <TextBlock Text="Imiona rodziców" Width="175"/>
                         <TextBox Width="95" Height="20"/>
                         <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
-                        <!--bruh-->
                         <TextBox Width="95" Height="20"/>
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
