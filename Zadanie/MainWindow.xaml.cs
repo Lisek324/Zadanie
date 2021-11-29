@@ -38,19 +38,19 @@ namespace Zadanie
              * u - uczniowe
              * n - nauczyciele
              * p - personel
-             * tablice zawierają id kontrolek
+             * tablice zawierają id kontrolek WYMAGANYCH do wypełnienia
              */
-            TextBox[] formtxtbox_u = {imie_uczen};
-            ComboBox[] formcombobox_u = { };
-            DatePicker[] formdatepicker_u = { };
+            TextBox[] formtxtbox_u = {imie_uczen, nazwisko_uczen, imie_rodzic_1_uczen, imie_rodzic_2_uczen, pesel_uczen, klasa_uczen, grupa_uczen, miedzyklasa_uczen};
+            ComboBox[] formcombobox_u = {plec_uczen};//po co mi tablica z jednym elementem? Jak wykorzystać warunek po foreachu?
+            DatePicker[] formdatepicker_u = {data_urodzenia_uczen};
 
-            TextBox[] formtxtbox_n = { };
-            ComboBox[] formcombobox_n = { };
-            DatePicker[] formdatepicker_n = { };
+            TextBox[] formtxtbox_n = {imie_nauczyciel, nazwisko_nauczyciel, imie_rodzic_1_nauczyciel, imie_rodzic_2_nauczyciel, pesel_nauczyciel, przedmiot_nauczania_nauczyciel};
+            ComboBox[] formcombobox_n = {plec_nauczyciel};
+            DatePicker[] formdatepicker_n = {data_urodzenia_nauczyciel, data_zatrudnienia_nauczyciel};
 
-            TextBox[] formtxtbox_p = { };
-            ComboBox[] formcombobox_p = { };
-            DatePicker[] formdatepicker_p = { };
+            TextBox[] formtxtbox_p = {imie_personel, nazwisko_personel, imie_rodzic_1_personel, imie_rodzic_2_personel, pesel_personel, opis_stanowiska_personel};
+            ComboBox[] formcombobox_p = {plec_personel, info_etat_personel};
+            DatePicker[] formdatepicker_p = {data_urodzenia_personel, data_zatrudnienia_personel};
 
 
 
@@ -71,8 +71,24 @@ namespace Zadanie
                                 MessageBox.Show("Nie wypełniono wymaganych pól");
                                 break;
                             }
-                            else continue;/* to jest źle - tu ma być wpisanie do datagrid*/
                         }
+                        foreach (ComboBox cmb in formcombobox_u)
+                        {
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                MessageBox.Show("Nie wybrano wymaganych pól");
+                                break;
+                            }
+                        }
+                        //niepotrzebna pętla? - stworzyć onChange datepicker ustawiający wartość domyślną; jeśli datepicker posiada tą wartość nie przechodzi przez warunek
+                        /*foreach (DatePicker dp in formdatepicker_u)
+                        {
+                            if (dp!=defaul)
+                            {
+                                MessageBox.Show("Nie wybrano wymaganych pól");
+                                break;
+                            }
+                        }*/
                         break;
                     case "Nauczyciele":
                         break;
@@ -80,6 +96,57 @@ namespace Zadanie
                         break;
                 }
             }
+        }
+
+        private void Data_zatrudnienia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabItem ti = Tabs.SelectedItem as TabItem;
+            var dzis = DateTime.Today;
+
+            switch (ti.Header)
+            {
+                case "Nauczyciele":
+                    if (dzis < data_zatrudnienia_nauczyciel.SelectedDate) 
+                    {
+                        MessageBox.Show("Data zatrudnienia nie może być wrpowadzona z wyprzedzeniem dzisiejszego dnia");
+                        data_zatrudnienia_nauczyciel.DisplayDate = DateTime.Now.Date;
+                    }
+                        break;
+                case "Personel":
+                    if (dzis < data_zatrudnienia_personel.SelectedDate)
+                    {
+                        MessageBox.Show("Data zatrudnienia nie może być wrpowadzona z wyprzedzeniem dzisiejszego dnia");
+                        data_zatrudnienia_personel.DisplayDate = DateTime.Now.Date;
+                    }
+                    break;
+            }
+        }
+
+        private void data_urodzenia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabItem ti = Tabs.SelectedItem as TabItem;
+            DateTime dzis = DateTime.Today;
+
+            TimeSpan ok = dzis - data_urodzenia_uczen.SelectedDate.Value;//rozwiązanie(chyba)
+
+            /* switch (ti.Header)
+             {
+                 case "Uczniowie":
+                     if (data_urodzenia_uczen.SelectedDate >=  dzis)
+                     {
+                         MessageBox.Show("Aby być uczniem w tej szkole, trzeba mieć skończone conajmniej 6 lat");
+                     } 
+                     if(u < 6)
+                     {
+
+                     }
+                     break;
+
+                 case "Nauczyciele":
+                     break;
+                 case "Personel":
+                     break;
+             }*/
         }
     }
 }

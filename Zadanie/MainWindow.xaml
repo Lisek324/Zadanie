@@ -171,7 +171,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data Urodzenia" Width="175"/>
-                        <DatePicker Width="200" Name="data_urodzenia_nauczyciel"></DatePicker>
+                        <DatePicker Width="200" Name="data_urodzenia_nauczyciel" SelectedDateChanged="data_urodzenia_SelectedDateChanged"></DatePicker>
                     </StackPanel>
                     <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Pesel" Width="175"/>
@@ -191,22 +191,27 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <TextBlock Text="Wychowawstwo*"  Width="175"/>
-                        <TextBox Width="200" Height="20" Name="wychowawstwo_nauczyciel"/>
+                        <TextBlock Text="Wychowawstwo*"  Width="175"></TextBlock>
+                        <CheckBox Name="wychowawstwo_nauczyciel">TAK/NIE</CheckBox>
                     </StackPanel>
                     <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Przedmioty nauczania" Width="175"/>
-                        <TextBox Width="200" Height="20" Name="prezdmioty_nauczania_nauczyciel"/>
+                        <TextBox Width="200" Height="20" Name="przedmiot_nauczania_nauczyciel"/>
+                        <!--<ListBox Height="" Name="przedmioty_nauczania_nauczyciel">
+                            <ListBoxItem>najlepszy przedmiot nauuuuuuuuczaniaaaaaaaaaaaaaa</ListBoxItem>
+                            <ListBoxItem>bbbbbbbbbbbbbb</ListBoxItem>
+                            <ListBoxItem>cccccccc</ListBoxItem>
+                        </ListBox>-->
                     </StackPanel>
                     <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data zatrudnienia" Width="175"/>
-                        <DatePicker Width="200" Name="data_zatrudnienia_nauczyciel"/>
+                        <DatePicker Width="200" Name="data_zatrudnienia_nauczyciel" SelectedDateChanged="Data_zatrudnienia_SelectedDateChanged"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
 
             <!--Personel-->
-            <TabItem Header="Personel szkolny">
+            <TabItem Header="Personel">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -231,33 +236,33 @@
                     <DataGrid Grid.Column="1" Grid.RowSpan="12"/>
                     <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Imie" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="imie_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Drugie imie*" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="drugie_imie_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Nazwisko" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="nazwisko_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Nazwisko panieńskie*" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="nazwisko_panienskie_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Imiona rodziców" Width="175"/>
-                        <TextBox Width="95" Height="20"/>
+                        <TextBox Width="95" Height="20" Name="imie_rodzic_1_personel"/>
                         <TextBox IsEnabled="False" Width="10" Visibility="Hidden"></TextBox>
-                        <TextBox Width="95" Height="20"/>
+                        <TextBox Width="95" Height="20" Name="imie_rodzic_2_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data Urodzenia" Width="175"/>
-                        <DatePicker Width="200"></DatePicker>
+                        <DatePicker Width="200" Name="data_urodzenia_personel"></DatePicker>
                     </StackPanel>
                     <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Pesel" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="pesel_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Zdjęcie" Width="175"/>
@@ -265,7 +270,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Płeć"  Width="175"/>
-                        <ComboBox Width="100">
+                        <ComboBox Width="100" Name="plec_personel">
                             <ComboBoxItem  IsSelected="True" IsEnabled="False">Wybierz płeć</ComboBoxItem>
                             <ComboBoxItem>Kobieta</ComboBoxItem>
                             <ComboBoxItem>Mężczyzna</ComboBoxItem>
@@ -274,15 +279,20 @@
                     </StackPanel>
                     <StackPanel Grid.Row="9" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Inforamcje o etacie"  Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <!--<TextBox Width="200" Height="20-->
+                        <ComboBox Name="info_etat_personel">
+                            <ComboBoxItem>1/2 etatu</ComboBoxItem>
+                            <ComboBoxItem>3/4 etatu</ComboBoxItem>
+                            <ComboBoxItem>cały etat</ComboBoxItem>
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Row="10" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Opis stanowiska" Width="175"/>
-                        <TextBox Width="200" Height="20"/>
+                        <TextBox Width="200" Height="20" Name="opis_stanowiska_personel"/>
                     </StackPanel>
                     <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data zatrudnienia" Width="175"/>
-                        <DatePicker Width="200"/>
+                        <DatePicker Width="200" Name="data_zatrudnienia_personel" SelectedDateChanged="Data_zatrudnienia_SelectedDateChanged"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
