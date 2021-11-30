@@ -1,9 +1,9 @@
 ﻿/**
- * konieczny warunek na datę
- * stowrzyć foreacha na comboboxa
+ * input number dla peselu
  * warunek czy zdjęcie zostało przesłane
  * przyciski usuń, import, export jako txt
  * stworzenie wyszukiwarki
+ * przycisk usuń robi się enabled true gdy wiersz tabeli jest podświetlony
  */
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace Zadanie
 {
@@ -32,6 +33,17 @@ namespace Zadanie
             InitializeComponent();
         }
 
+        private void Zadanie_Loaded(object sender, RoutedEventArgs e) 
+        {
+  
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Dodaj_onClicik(object sender, RoutedEventArgs e)
         {
             /**
@@ -40,12 +52,14 @@ namespace Zadanie
              * p - personel
              * tablice zawierają id kontrolek WYMAGANYCH do wypełnienia
              */
+            bool czydodac = false;
+
             TextBox[] formtxtbox_u = {imie_uczen, nazwisko_uczen, imie_rodzic_1_uczen, imie_rodzic_2_uczen, pesel_uczen, klasa_uczen, grupa_uczen, miedzyklasa_uczen};
-            ComboBox[] formcombobox_u = {plec_uczen};//po co mi tablica z jednym elementem? Jak wykorzystać warunek po foreachu?
-            DatePicker[] formdatepicker_u = {data_urodzenia_uczen};
+            ComboBox[] formcombobox_u = {plec_uczen};//po co mi tablica z jednym elementem?
+            DatePicker[] formdatepicker_u = {data_urodzenia_uczen};//i to też
 
             TextBox[] formtxtbox_n = {imie_nauczyciel, nazwisko_nauczyciel, imie_rodzic_1_nauczyciel, imie_rodzic_2_nauczyciel, pesel_nauczyciel, przedmiot_nauczania_nauczyciel};
-            ComboBox[] formcombobox_n = {plec_nauczyciel};
+            ComboBox[] formcombobox_n = {plec_nauczyciel};//co ja robie
             DatePicker[] formdatepicker_n = {data_urodzenia_nauczyciel, data_zatrudnienia_nauczyciel};
 
             TextBox[] formtxtbox_p = {imie_personel, nazwisko_personel, imie_rodzic_1_personel, imie_rodzic_2_personel, pesel_personel, opis_stanowiska_personel};
@@ -62,13 +76,16 @@ namespace Zadanie
                 /**
                  * w zależności jaka zakładka aktualnie jest wyświetlna, robi się pętla przez tablice, która sprawdzi czy wymagane pola są wypełnione
                  */
+
                 switch (ti.Header) {
+
                     case "Uczniowie":
                         foreach (TextBox txt in formtxtbox_u)
                         {
                             if (string.IsNullOrEmpty(txt.Text))
                             {
                                 MessageBox.Show("Nie wypełniono wymaganych pól");
+                                czydodac = false;
                                 break;
                             }
                         }
@@ -77,22 +94,103 @@ namespace Zadanie
                             if (cmb.SelectedIndex == 0)
                             {
                                 MessageBox.Show("Nie wybrano wymaganych pól");
+                                czydodac = false;
                                 break;
                             }
                         }
-                        //niepotrzebna pętla? - stworzyć onChange datepicker ustawiający wartość domyślną; jeśli datepicker posiada tą wartość nie przechodzi przez warunek
-                        /*foreach (DatePicker dp in formdatepicker_u)
+                        if (data_urodzenia_uczen.SelectedDate == null)
                         {
-                            if (dp!=defaul)
+                            MessageBox.Show("Wybierz datę urodzenia ucznia");
+                            czydodac = false;
+                        }
+                        else if (data_urodzenia_uczen.SelectedDate.Value.AddYears(6) > DateTime.Now)
+                        {
+                            MessageBox.Show("Aby być uczniem w tej szkole, trzeba mieć skończone conajmniej 6 lat");
+                            czydodac = false;
+                        }
+                        else czydodac = true;
+
+                        if (czydodac)
+                        { 
+                        /*kod na wpisanie do tabeli uczniowie*/
+                        }
+                        czydodac = false;
+                        break;
+    
+                    case "Nauczyciele":
+                        foreach (TextBox txt in formtxtbox_n)
+                        {
+                            if (string.IsNullOrEmpty(txt.Text))
                             {
-                                MessageBox.Show("Nie wybrano wymaganych pól");
+                                MessageBox.Show("Nie wypełniono wymaganych pól");
+                                czydodac = false;
                                 break;
                             }
-                        }*/
+                        }
+                        foreach (ComboBox cmb in formcombobox_n)
+                        {
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                MessageBox.Show("Nie wybrano wymaganych pól");
+                                czydodac = false;
+                                break;
+                            }
+                        }
+                        if (data_urodzenia_nauczyciel.SelectedDate == null)
+                        {
+                            MessageBox.Show("Wybierz datę urodzenia nauczyciela");
+                            czydodac = false;
+                        }
+                        else if (data_urodzenia_nauczyciel.SelectedDate.Value.AddYears(18) > DateTime.Now)
+                        {
+                            MessageBox.Show("Aby być nauczycielem tego ośrodka wychowawczego trzeba mieć skończone conajmniej 18 lat");
+                            czydodac = false;
+                        }
+                        else czydodac = true;
+
+                        if (czydodac)
+                        {
+                            /*kod na wpisanie do tabeli nauczyciele*/
+                        }
+                        czydodac = false;
                         break;
-                    case "Nauczyciele":
-                        break;
+
                     case "Personel":
+                        foreach (TextBox txt in formtxtbox_p)
+                        {
+                            if (string.IsNullOrEmpty(txt.Text))
+                            {
+                                MessageBox.Show("Nie wypełniono wymaganych pól");
+                                czydodac = false;
+                                break;
+                            }
+                        }
+                        foreach (ComboBox cmb in formcombobox_p)
+                        {
+                            if (cmb.SelectedIndex == 0)
+                            {
+                                MessageBox.Show("Nie wybrano wymaganych pól");
+                                czydodac = false;
+                                break;
+                            }
+                        }
+                        if (data_urodzenia_personel.SelectedDate == null)
+                        {
+                            MessageBox.Show("Wybierz datę urodzenia personelu");
+                            czydodac = false;
+                        }
+                        else if (data_urodzenia_personel.SelectedDate.Value.AddYears(18) > DateTime.Now)
+                        {
+                            MessageBox.Show("Jako nieletni nikt by nie chiał pracować w tej budzie");
+                            czydodac = false;
+                        }
+                        else czydodac = true;
+
+                        if (czydodac)
+                        {
+                            /*kod na wpisanie do tabeli personel*/
+                        }
+                        czydodac = false;
                         break;
                 }
             }
@@ -100,53 +198,12 @@ namespace Zadanie
 
         private void Data_zatrudnienia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabItem ti = Tabs.SelectedItem as TabItem;
-            var dzis = DateTime.Today;
 
-            switch (ti.Header)
-            {
-                case "Nauczyciele":
-                    if (dzis < data_zatrudnienia_nauczyciel.SelectedDate) 
-                    {
-                        MessageBox.Show("Data zatrudnienia nie może być wrpowadzona z wyprzedzeniem dzisiejszego dnia");
-                        data_zatrudnienia_nauczyciel.DisplayDate = DateTime.Now.Date;
-                    }
-                        break;
-                case "Personel":
-                    if (dzis < data_zatrudnienia_personel.SelectedDate)
-                    {
-                        MessageBox.Show("Data zatrudnienia nie może być wrpowadzona z wyprzedzeniem dzisiejszego dnia");
-                        data_zatrudnienia_personel.DisplayDate = DateTime.Now.Date;
-                    }
-                    break;
-            }
         }
 
         private void data_urodzenia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabItem ti = Tabs.SelectedItem as TabItem;
-            DateTime dzis = DateTime.Today;
 
-            TimeSpan ok = dzis - data_urodzenia_uczen.SelectedDate.Value;//rozwiązanie(chyba)
-
-            /* switch (ti.Header)
-             {
-                 case "Uczniowie":
-                     if (data_urodzenia_uczen.SelectedDate >=  dzis)
-                     {
-                         MessageBox.Show("Aby być uczniem w tej szkole, trzeba mieć skończone conajmniej 6 lat");
-                     } 
-                     if(u < 6)
-                     {
-
-                     }
-                     break;
-
-                 case "Nauczyciele":
-                     break;
-                 case "Personel":
-                     break;
-             }*/
         }
     }
 }
