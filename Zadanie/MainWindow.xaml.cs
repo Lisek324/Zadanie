@@ -111,8 +111,15 @@ namespace Zadanie
                         else czydodac = true;
 
                         if (czydodac)
-                        { 
-                        /*kod na wpisanie do tabeli uczniowie*/
+                        {
+                            /*dodawanie do datagrid rekordów*/
+                            var data = new Uczniowie { Imie = imie_uczen.Text, Drugie_Imie = drugie_imie_uczen.Text, Nazwisko = nazwisko_uczen.Text,
+                            Nazwisko_Panienskie = nazwisko_panienskie_uczen.Text, Imie_Rodzic_1 = imie_rodzic_1_uczen.Text,
+                            Imie_Rodzic_2 = imie_rodzic_2_uczen.Text, Data_Urodzenia = data_urodzenia_uczen.SelectedDate.Value,
+                            Pesel = pesel_uczen.Text, /*Zdjecie = ??? ,*/Plec = plec_uczen.SelectedIndex.ToString(), Klasa = klasa_uczen.Text, 
+                            Grupa = grupa_uczen.Text, Miedzyklasa = miedzyklasa_uczen.Text};
+
+                            datagrid_u.Items.Add(data);
                         }
                         czydodac = false;
                         break;
@@ -163,6 +170,7 @@ namespace Zadanie
                                 MessageBox.Show("Nie wypełniono wymaganych pól");
                                 czydodac = false;
                                 break;
+                                //komentarzfgmbnmbmghj
                             }
                         }
                         foreach (ComboBox cmb in formcombobox_p)
@@ -205,5 +213,23 @@ namespace Zadanie
         {
 
         }
+        public class Uczniowie
+        {
+            public string Imie { get; set; }
+            public string Drugie_Imie { get; set; }
+            public string Nazwisko { get; set; }
+            public string Nazwisko_Panienskie { get; set; }
+            public string Imie_Rodzic_1 { get; set; }
+            public string Imie_Rodzic_2 { get; set; }
+            public DateTime Data_Urodzenia{ get; set; }
+            public string Pesel { get; set; }
+            public string Zdjecie { get; set; }
+            public string Plec { get; set; }
+            public string Klasa { get; set; }
+            public string Grupa { get; set; }
+            public string Miedzyklasa { get; set; }
+
+        }
+
     }
 }

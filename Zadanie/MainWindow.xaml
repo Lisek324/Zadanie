@@ -63,8 +63,24 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    
-                    <DataGrid Grid.Column="1" Grid.RowSpan="12"/>
+
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_u"><!--z jakiegoś powodu płacze że funkcji nie ma-->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko" IsReadOnly="True" Binding="{Binding Path=Nazwisko}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko Panieńskie" IsReadOnly="True"  Binding="{Binding Path=Nazwisko_Panienskie}" Width="130"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 1" IsReadOnly="True" Binding="{Binding Path=Imie_Rodzic_1}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Path=Zdjecie}" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Klasa" IsReadOnly="True"  Binding="{Binding Path=Klasa}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Grupa" IsReadOnly="True"  Binding="{Binding Path=Grupa}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Międzyklasa" IsReadOnly="True"  Binding="{Binding Path=Miedzyklasa}" Width="130"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Imie" Width="175"/>
                         <TextBox Width="200" Height="20" Name="imie_uczen"/>
