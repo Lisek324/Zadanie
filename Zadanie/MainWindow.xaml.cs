@@ -249,16 +249,6 @@ namespace Zadanie
                 }
             }
         }
-
-        private void Data_zatrudnienia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void data_urodzenia_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         public class Uczniowie
         {
             public string Imie { get; set; }

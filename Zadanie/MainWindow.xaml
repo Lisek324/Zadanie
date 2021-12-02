@@ -101,7 +101,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data Urodzenia" Width="175"/>
-                        <DatePicker Width="200" Name="data_urodzenia_uczen" SelectedDateChanged="data_urodzenia_SelectedDateChanged" DisplayDateStart="12/7/1999"></DatePicker>
+                        <DatePicker Width="200" Name="data_urodzenia_uczen" DisplayDateStart="12/7/1999"></DatePicker>
                     </StackPanel>
                     <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Pesel" Width="175"/>
@@ -199,7 +199,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data Urodzenia" Width="175"/>
-                        <DatePicker Width="200" Name="data_urodzenia_nauczyciel" SelectedDateChanged="data_urodzenia_SelectedDateChanged"></DatePicker>
+                        <DatePicker Width="200" Name="data_urodzenia_nauczyciel"></DatePicker>
                     </StackPanel>
                     <StackPanel Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Pesel" Width="175"/>
@@ -228,7 +228,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data zatrudnienia" Width="175"/>
-                        <DatePicker Width="200" Name="data_zatrudnienia_nauczyciel" SelectedDateChanged="Data_zatrudnienia_SelectedDateChanged" DisplayDateStart="12/7/1941"/>
+                        <DatePicker Width="200" Name="data_zatrudnienia_nauczyciel" DisplayDateStart="12/7/1941"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -333,7 +333,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="11" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Data zatrudnienia" Width="175"/>
-                        <DatePicker Width="200" Name="data_zatrudnienia_personel" SelectedDateChanged="Data_zatrudnienia_SelectedDateChanged" DisplayDateStart="12/7/1941"/>
+                        <DatePicker Width="200" Name="data_zatrudnienia_personel" DisplayDateStart="12/7/1941"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
