@@ -48,6 +48,7 @@ namespace Zadanie
         }
 
         bool czydodac = true;
+        
 
         private void Dodaj_onClicik(object sender, RoutedEventArgs e)
         {
@@ -57,7 +58,8 @@ namespace Zadanie
              * p - personel
              * tablice zawierają id kontrolek WYMAGANYCH do wypełnienia
              */
-            
+
+            TabItem ti = Tabs.SelectedItem as TabItem;
 
             TextBox[] formtxtbox_u = {imie_uczen, nazwisko_uczen, imie_rodzic_1_uczen, imie_rodzic_2_uczen, pesel_uczen, klasa_uczen, grupa_uczen, miedzyklasa_uczen};
             ComboBox[] formcombobox_u = {plec_uczen};//po co mi tablica z jednym elementem?
@@ -73,7 +75,7 @@ namespace Zadanie
 
 
 
-            TabItem ti = Tabs.SelectedItem as TabItem;
+            
 
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Dodany zostanie rekord do tabeli " + ti.Header + ", kontynuować?", "Potwierdzenie dodania", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
@@ -311,5 +313,37 @@ namespace Zadanie
 
         }
 
+        private void Usun_Click(object sender, RoutedEventArgs e)
+        {
+            TabItem ti = Tabs.SelectedItem as TabItem;
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: "+ti.Header+"?","Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
+
+            if (datagrid_u.SelectedItem != null)
+            {
+                switch(ti.Header)
+                {
+                    case "Uczniowie":
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            datagrid_u.Items.Remove(datagrid_u.SelectedItem);
+                        }
+                        break;
+                    case "Nauczyciele":
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            datagrid_n.Items.Remove(datagrid_n.SelectedItem);
+                        }
+                        break;
+                    case "Personel":
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            datagrid_p.Items.Remove(datagrid_p.SelectedItem);
+                        }
+                        break;
+                }
+                
+            }
+            else MessageBox.Show("Nie zaznaczono wiersza");
+        }
     }
 }
