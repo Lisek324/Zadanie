@@ -24,7 +24,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
             <Button Width="100px" Height="25px" Margin="5px" Click="Usun_Click">Usuń</Button>
-            <Button Width="100px" Height="25px" Margin="5px">Eksportuj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Export_Click">Eksportuj</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button Width="200" Height="50">Wyszukaj</Button>
