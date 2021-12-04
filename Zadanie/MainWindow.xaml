@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
             <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_onClicik">Dodaj</Button>
-            <Button Width="100px" Height="25px" Margin="5px">Importuj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Import_Click">Importuj</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
             <Button Width="100px" Height="25px" Margin="5px" Click="Usun_Click">Usuń</Button>

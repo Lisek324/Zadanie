@@ -32,10 +32,15 @@ namespace Zadanie
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        
         public MainWindow()
         {
+            
             InitializeComponent();
         }
+
+        List<Uczniowie> lista = new List<Uczniowie>();
 
         private void Zadanie_Loaded(object sender, RoutedEventArgs e)
         {
@@ -137,7 +142,6 @@ namespace Zadanie
                                 Grupa = grupa_uczen.Text,
                                 Miedzyklasa = miedzyklasa_uczen.Text
                             };
-
                             datagrid_u.Items.Add(data);
                         }
                         czydodac = true;
@@ -186,7 +190,7 @@ namespace Zadanie
                                 Data_Urodzenia = data_urodzenia_nauczyciel.SelectedDate.Value,
                                 Pesel = pesel_nauczyciel.Text,
                                 /*Zdjecie = ??? ,*/
-                                Plec = plec_nauczyciel.SelectedIndex.ToString(),
+                                Plec = plec_nauczyciel.SelectedIndex.ToString(), //zrobić switcha
                                 Wychowawstwo = wychowawstwo_nauczyciel.IsChecked.Value,
                                 Przedmioty = przedmiot_nauczania_nauczyciel.Text,
                                 Data_Zatrudnienia = data_zatrudnienia_nauczyciel.SelectedDate.Value
@@ -253,6 +257,23 @@ namespace Zadanie
         }
         public class Uczniowie
         {
+            /*public Uczniowie(string imie, string drugie_Imie, string nazwisko, string nazwisko_Panienskie, string imie_Rodzic_1, string imie_Rodzic_2, DateTime data_Urodzenia, string pesel, string zdjecie, string plec, string klasa, string grupa, string miedzyklasa)
+            {
+                Imie = imie;
+                Drugie_Imie = drugie_Imie;
+                Nazwisko = nazwisko;
+                Nazwisko_Panienskie = nazwisko_Panienskie;
+                Imie_Rodzic_1 = imie_Rodzic_1;
+                Imie_Rodzic_2 = imie_Rodzic_2;
+                Data_Urodzenia = data_Urodzenia;
+                Pesel = pesel;
+                Zdjecie = zdjecie;
+                Plec = plec;
+                Klasa = klasa;
+                Grupa = grupa;
+                Miedzyklasa = miedzyklasa;
+            }*/
+
             public string Imie { get; set; }
             public string Drugie_Imie { get; set; }
             public string Nazwisko { get; set; }
@@ -310,7 +331,7 @@ namespace Zadanie
             TabItem ti = Tabs.SelectedItem as TabItem;
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: " + ti.Header + "?", "Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
 
-            if (datagrid_u.SelectedItem != null)
+            if (datagrid_u.SelectedItem != null)//zwróci fałsz w przypadku zaznaczonego wiersza w tabeli nauczycieli DO POPRAWY
             {
                 switch (ti.Header)
                 {
@@ -380,13 +401,67 @@ namespace Zadanie
                             + uczniowie.Klasa + " "
                             + uczniowie.Grupa + " "
                             + uczniowie.Miedzyklasa + " "
-                            +"\n";
+                            + "\n";
                     }
                     File.WriteAllText(dlg.FileName, str);
                 }
-               
+
             }
 
         }
+
+        
+
+          
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                string[] values;
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    values = lines[i].Split(' ');
+                    string[] row = new string[values.Length];
+
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        row[j] = values[j].Trim();
+                        
+                    }
+                    //lista.Add(new Uczniowie { Imie = row[0], Drugie_Imie = row[1], Nazwisko = row[2] });
+                    var data = new Uczniowie
+                    { 
+                        Imie = row[0],
+                        Drugie_Imie = row[1]
+                    };
+                    datagrid_u.Items.Add(data);
+                    /*datagrid_u.ItemsSource = null;
+                    datagrid_u.ItemsSource = lista;*/
+
+
+                    /*foreach (var kom in datagrid_u.Items)
+                    {
+                        var data = new Uczniowie//klasa Uczniowie
+                        {
+                            Imie = row[i].ToString()
+                            /*Imie = pierwszy string z pliku tekstowego
+                        };
+                    }*/
+                }
+            }
+            
+            
+            /*lista.Add(new Uczniowie());
+            datagrid_u.ItemsSource = null;
+            datagrid_u.ItemsSource = lista;*/
+            
+        }
     }
 }
+
