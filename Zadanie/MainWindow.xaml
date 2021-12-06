@@ -30,6 +30,8 @@
             <Button Width="200" Height="50">Wyszukaj</Button>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
+            <TextBlock Text="Eksport tylko z zaznaczonych" FontStyle="Italic" FontSize="10"></TextBlock>
+            <TextBlock Text="wierszy" FontStyle="Italic" FontSize="10"></TextBlock>
             <TextBlock Text="*-pola niewymagane" FontStyle="Italic" FontSize="10"></TextBlock>
         </StackPanel>
 
