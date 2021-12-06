@@ -36,9 +36,9 @@ namespace Zadanie
             InitializeComponent();
         }
 
-        private void Zadanie_Loaded(object sender, RoutedEventArgs e) 
+        private void Zadanie_Loaded(object sender, RoutedEventArgs e)
         {
-  
+
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -48,9 +48,9 @@ namespace Zadanie
         }
 
         bool czydodac = true;
-        
 
-        private void Dodaj_onClicik(object sender, RoutedEventArgs e)
+
+        private void Dodaj_Click(object sender, RoutedEventArgs e)
         {
             /**
              * u - uczniowe
@@ -61,21 +61,21 @@ namespace Zadanie
 
             TabItem ti = Tabs.SelectedItem as TabItem;
 
-            TextBox[] formtxtbox_u = {imie_uczen, nazwisko_uczen, imie_rodzic_1_uczen, imie_rodzic_2_uczen, pesel_uczen, klasa_uczen, grupa_uczen, miedzyklasa_uczen};
-            ComboBox[] formcombobox_u = {plec_uczen};//po co mi tablica z jednym elementem?
-            DatePicker[] formdatepicker_u = {data_urodzenia_uczen};//i to też
+            TextBox[] formtxtbox_u = { imie_uczen, nazwisko_uczen, imie_rodzic_1_uczen, imie_rodzic_2_uczen, pesel_uczen, klasa_uczen, grupa_uczen, miedzyklasa_uczen };
+            ComboBox[] formcombobox_u = { plec_uczen };//po co mi tablica z jednym elementem?
+            DatePicker[] formdatepicker_u = { data_urodzenia_uczen };//i to też
 
-            TextBox[] formtxtbox_n = {imie_nauczyciel, nazwisko_nauczyciel, imie_rodzic_1_nauczyciel, imie_rodzic_2_nauczyciel, pesel_nauczyciel, przedmiot_nauczania_nauczyciel};
-            ComboBox[] formcombobox_n = {plec_nauczyciel};//co ja robie
-            DatePicker[] formdatepicker_n = {data_urodzenia_nauczyciel, data_zatrudnienia_nauczyciel};
+            TextBox[] formtxtbox_n = { imie_nauczyciel, nazwisko_nauczyciel, imie_rodzic_1_nauczyciel, imie_rodzic_2_nauczyciel, pesel_nauczyciel, przedmiot_nauczania_nauczyciel };
+            ComboBox[] formcombobox_n = { plec_nauczyciel };//co ja robie
+            DatePicker[] formdatepicker_n = { data_urodzenia_nauczyciel, data_zatrudnienia_nauczyciel };
 
-            TextBox[] formtxtbox_p = {imie_personel, nazwisko_personel, imie_rodzic_1_personel, imie_rodzic_2_personel, pesel_personel, opis_stanowiska_personel};
-            ComboBox[] formcombobox_p = {plec_personel, info_etat_personel};
-            DatePicker[] formdatepicker_p = {data_urodzenia_personel, data_zatrudnienia_personel};
+            TextBox[] formtxtbox_p = { imie_personel, nazwisko_personel, imie_rodzic_1_personel, imie_rodzic_2_personel, pesel_personel, opis_stanowiska_personel };
+            ComboBox[] formcombobox_p = { plec_personel, info_etat_personel };
+            DatePicker[] formdatepicker_p = { data_urodzenia_personel, data_zatrudnienia_personel };
 
 
 
-            
+
 
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Dodany zostanie rekord do tabeli " + ti.Header + ", kontynuować?", "Potwierdzenie dodania", System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
@@ -84,7 +84,8 @@ namespace Zadanie
                  * w zależności jaka zakładka aktualnie jest wyświetlna, robi się pętla przez tablice, która sprawdzi czy wymagane pola są wypełnione
                  */
 
-                switch (ti.Header) {
+                switch (ti.Header)
+                {
 
                     case "Uczniowie":
                         foreach (TextBox txt in formtxtbox_u)
@@ -119,20 +120,20 @@ namespace Zadanie
                         if (czydodac)
                         {
                             /*dodawanie do datagrid rekordów*/
-                            var data = new Uczniowie 
-                            { 
-                                Imie = imie_uczen.Text, 
+                            var data = new Uczniowie
+                            {
+                                Imie = imie_uczen.Text,
                                 Drugie_Imie = drugie_imie_uczen.Text,
                                 Nazwisko = nazwisko_uczen.Text,
                                 Nazwisko_Panienskie = nazwisko_panienskie_uczen.Text,
                                 Imie_Rodzic_1 = imie_rodzic_1_uczen.Text,
                                 Imie_Rodzic_2 = imie_rodzic_2_uczen.Text,
                                 Data_Urodzenia = data_urodzenia_uczen.SelectedDate.Value,
-                                Pesel = pesel_uczen.Text, 
+                                Pesel = pesel_uczen.Text,
                                 /*Zdjecie = ??? ,*/
                                 Plec = plec_uczen.SelectedIndex.ToString(),
-                                Klasa = klasa_uczen.Text, 
-                                Grupa = grupa_uczen.Text, 
+                                Klasa = klasa_uczen.Text,
+                                Grupa = grupa_uczen.Text,
                                 Miedzyklasa = miedzyklasa_uczen.Text
                             };
 
@@ -140,7 +141,7 @@ namespace Zadanie
                         }
                         czydodac = true;
                         break;
-    
+
                     case "Nauczyciele":
                         foreach (TextBox txt in formtxtbox_n)
                         {
@@ -257,7 +258,7 @@ namespace Zadanie
             public string Nazwisko_Panienskie { get; set; }
             public string Imie_Rodzic_1 { get; set; }
             public string Imie_Rodzic_2 { get; set; }
-            public DateTime Data_Urodzenia{ get; set; }
+            public DateTime Data_Urodzenia { get; set; }
             public string Pesel { get; set; }
             public string Zdjecie { get; set; }
             public string Plec { get; set; }
@@ -306,11 +307,11 @@ namespace Zadanie
         private void Usun_Click(object sender, RoutedEventArgs e)
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: "+ti.Header+"?","Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: " + ti.Header + "?", "Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
 
             if (datagrid_u.SelectedItem != null)
             {
-                switch(ti.Header)
+                switch (ti.Header)
                 {
                     case "Uczniowie":
                         if (messageBoxResult == MessageBoxResult.Yes)
@@ -331,9 +332,44 @@ namespace Zadanie
                         }
                         break;
                 }
-                
+
             }
             else MessageBox.Show("Nie zaznaczono wiersza");
+        }
+
+        /*Importowanie*/
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            /*Deklaracja listy do przechowywania wartości z tabeli*/
+            List<string> list = new List<string>();
+
+            for (int i = 0; i < datagrid_u.Items.Count; i++)        //wiersze
+            {
+                for (int j = 0; i < datagrid_u.Columns.Count; j++)  //kolumny
+                {
+                    string value = datagrid_u.Items[i].ToString();// + datagrid_u.Columns[j].ToString();
+                    list.Add(value);
+                }
+                list.Add("\t");
+            }
+            System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Kuba\Desktop\test.txt");
+            foreach (var item in list)
+            {
+                if (item != "\n")
+                {
+                    file.Write(item + "\t\t");
+                }
+                else
+                {
+                    file.WriteLine(item);
+                }
+            }
+            file.Close();
         }
     }
 }

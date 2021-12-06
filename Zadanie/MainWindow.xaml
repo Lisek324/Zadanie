@@ -19,12 +19,12 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_onClicik">Dodaj</Button>
-            <Button Width="100px" Height="25px" Margin="5px">Importuj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_Click">Dodaj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Import_Click">Importuj</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
             <Button Width="100px" Height="25px" Margin="5px" Click="Usun_Click">Usuń</Button>
-            <Button Width="100px" Height="25px" Margin="5px">Eksportuj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Export_Click">Eksportuj</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Button Width="200" Height="50">Wyszukaj</Button>
@@ -76,7 +76,7 @@
                             <DataGridTextColumn Header="Międzyklasa" IsReadOnly="True"  Binding="{Binding Path=Miedzyklasa}" Width="130"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    
+
                     <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Imie" Width="175"/>
                         <TextBox Width="200" Height="20" Name="imie_uczen"/>
