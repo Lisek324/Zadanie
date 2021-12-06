@@ -19,7 +19,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_Click">Dodaj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_onClicik">Dodaj</Button>
             <Button Width="100px" Height="25px" Margin="5px" Click="Import_Click">Importuj</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
@@ -30,6 +30,8 @@
             <Button Width="200" Height="50">Wyszukaj</Button>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
+            <TextBlock Text="Eksport tylko z zaznaczonych" FontStyle="Italic" FontSize="10"></TextBlock>
+            <TextBlock Text="wierszy" FontStyle="Italic" FontSize="10"></TextBlock>
             <TextBlock Text="*-pola niewymagane" FontStyle="Italic" FontSize="10"></TextBlock>
         </StackPanel>
 
