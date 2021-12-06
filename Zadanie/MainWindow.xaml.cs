@@ -313,6 +313,9 @@ namespace Zadanie
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: " + ti.Header + "?", "Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
+
+            if (datagrid_u.SelectedItem != null)//zwróci fałsz w przypadku zaznaczonego wiersza w tabeli nauczycieli DO POPRAWY
+            {
                 switch (ti.Header)
                 {
                     case "Uczniowie":
@@ -526,5 +529,184 @@ namespace Zadanie
                 }
             }
         }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            string str = "";
+            TabItem ti = Tabs.SelectedItem as TabItem;
+                
+                if (dlg.ShowDialog() == true)
+                {
+                    switch (ti.Header)
+                    {
+                        case "Uczniowie":
+
+                            Uczniowie uczniowie = new Uczniowie();
+                            foreach (var obj in datagrid_u.SelectedItems)
+                            {
+
+                                uczniowie = obj as Uczniowie;
+                                str += uczniowie.Imie + " "
+                                    + uczniowie.Drugie_Imie + " "
+                                    + uczniowie.Nazwisko + " "
+                                    + uczniowie.Nazwisko_Panienskie + " "
+                                    + uczniowie.Imie_Rodzic_1 + " "
+                                    + uczniowie.Imie_Rodzic_2 + " "
+                                    + uczniowie.Data_Urodzenia + " "
+                                    + uczniowie.Pesel + " "
+                                    //+ uczniowie.Zdjecie + " "
+                                    + uczniowie.Plec + " "
+                                    + uczniowie.Klasa + " "
+                                    + uczniowie.Grupa + " "
+                                    + uczniowie.Miedzyklasa + " "
+                                    + "\n";
+                            }
+                            File.WriteAllText(dlg.FileName, str);
+                            break;
+
+                        case "Nauczyciele":
+                            Nauczyciele nauczyciele= new Nauczyciele();
+                            foreach (var obj in datagrid_n.SelectedItems)
+                            {
+
+                                nauczyciele = obj as Nauczyciele;
+                                str += nauczyciele.Imie + " "
+                                    + nauczyciele.Drugie_Imie + " "
+                                    + nauczyciele.Nazwisko + " "
+                                    + nauczyciele.Nazwisko_Panienskie + " "
+                                    + nauczyciele.Imie_Rodzic_1 + " "
+                                    + nauczyciele.Imie_Rodzic_2 + " "
+                                    + nauczyciele.Data_Urodzenia + " "
+                                    + nauczyciele.Pesel + " "
+                                    //+ uczniowie.Zdjecie + " "
+                                    + nauczyciele.Plec + " "
+                                    + nauczyciele.Wychowawstwo + " "
+                                    + nauczyciele.Przedmioty + " "
+                                    + nauczyciele.Data_Zatrudnienia + " "
+                                    + "\n";
+                            }
+                            File.WriteAllText(dlg.FileName, str);
+                            break;
+
+                        case "Personel":
+
+                            foreach (var obj in datagrid_u.SelectedItems)
+                            {
+                                Personel personel= new Personel();
+                                personel = obj as Personel;
+                                str += personel.Imie + " "
+                                    + personel.Drugie_Imie + " "
+                                    + personel.Nazwisko + " "
+                                    + personel.Nazwisko_Panienskie + " "
+                                    + personel.Imie_Rodzic_1 + " "
+                                    + personel.Imie_Rodzic_2 + " "
+                                    + personel.Data_Urodzenia + " "
+                                    + personel.Pesel + " "
+                                    //+ uczniowie.Zdjecie + " "
+                                    + personel.Plec + " "
+                                    + personel.Info_Etat + " "
+                                    + personel.Opis + " "
+                                    + personel.Data_Zatrudnienia + " "
+                                    + "\n";
+                            }
+                            File.WriteAllText(dlg.FileName, str);
+                            break;
+                    }
+
+                }
+
+            
+
+        }
+
+
+
+
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+            TabItem ti = Tabs.SelectedItem as TabItem;
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string[] lines = File.ReadAllLines(openFileDialog.FileName);
+                string[] values;
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    values = lines[i].Split(' ');
+                    string[] row = new string[values.Length];
+
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        row[j] = values[j].Trim();
+
+                    }
+                    switch (ti.Header) {
+
+                        case "Uczniowie":
+                            var data_u = new Uczniowie
+                            {
+                                Imie = row[0],
+                                Drugie_Imie = row[1],
+                                Nazwisko = row[2],
+                                Nazwisko_Panienskie = row[3],
+                                Imie_Rodzic_1 = row[4],
+                                Imie_Rodzic_2 = row[5],
+                                Data_Urodzenia = row[6],
+                                Pesel = row[7],
+                                Plec = row[8],
+                                Klasa = row[9],
+                                Grupa = row[10],
+                                Miedzyklasa = row[11]
+                            };
+                            datagrid_u.Items.Add(data_u);
+                            break;
+
+                        case "Nauczyciele":
+                            var data_n = new Nauczyciele
+                            {
+                                Imie = row[0],
+                                Drugie_Imie = row[1],
+                                Nazwisko = row[2],
+                                Nazwisko_Panienskie = row[3],
+                                Imie_Rodzic_1 = row[4],
+                                Imie_Rodzic_2 = row[5],
+                                Data_Urodzenia = row[6],
+                                Pesel = row[7],
+                                Plec = row[8],
+                                Wychowawstwo = row[9],
+                                Przedmioty = row[10],
+                                Data_Zatrudnienia = row[11]
+                            };
+                            datagrid_u.Items.Add(data_n);
+                            break;
+
+                        case "Personel":
+                            var data_p = new Personel
+                            {
+                                Imie = row[0],
+                                Drugie_Imie = row[1],
+                                Nazwisko = row[2],
+                                Nazwisko_Panienskie = row[3],
+                                Imie_Rodzic_1 = row[4],
+                                Imie_Rodzic_2 = row[5],
+                                Data_Urodzenia = row[6],
+                                Pesel = row[7],
+                                Plec = row[8],
+                                Info_Etat = row[9],
+                                Opis = row[10],
+                                Data_Zatrudnienia= row[11]
+                            };
+                            datagrid_u.Items.Add(data_p);
+                            break;
+                    };
+                }
+            }
+        }
     }
 }
+
+
