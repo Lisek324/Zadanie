@@ -1,12 +1,7 @@
 ﻿/**
  * warunek czy zdjęcie zostało przesłane
- * przyciski usuń, import, export jako txt
  * stworzenie wyszukiwarki
- * przycisk usuń robi się enabled true gdy wiersz tabeli jest podświetlony
- * usunąć godzinę w dodanych wierszach
  * wychowanie zamiast True wpisuje TAK
- * wybrany index płeć K,M lub I
- * wybrany index info etat w tekscie
  */
 using System;
 using System.Collections.Generic;
@@ -55,8 +50,8 @@ namespace Zadanie
 
         bool czydodac = true;
 
-
-        private void Dodaj_onClicik(object sender, RoutedEventArgs e)
+        /***********DODAWANIE DO REKORDÓW***********/
+        private void Dodaj_Clicik(object sender, RoutedEventArgs e)
         {
             /**
              * u - uczniowe
@@ -136,7 +131,7 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_uczen.Text,
                                 Data_Urodzenia = data_urodzenia_uczen.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_uczen.Text,
-                                /*Zdjecie = ??? ,*/
+                                Zdjecie = new Uri(zdj.Source.ToString()),
                                 Plec = plec_uczen.Text,
                                 Klasa = klasa_uczen.Text,
                                 Grupa = grupa_uczen.Text,
@@ -190,7 +185,7 @@ namespace Zadanie
                                 Data_Urodzenia = data_urodzenia_nauczyciel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_nauczyciel.Text,
                                 /*Zdjecie = ??? ,*/
-                                Plec = plec_nauczyciel.Text, //zrobić switcha
+                                Plec = plec_nauczyciel.Text,
                                 Wychowawstwo = wychowawstwo_nauczyciel.IsChecked.Value.ToString(),
                                 Przedmioty = przedmiot_nauczania_nauczyciel.Text,
                                 Data_Zatrudnienia = data_zatrudnienia_nauczyciel.SelectedDate.Value.Date.ToShortDateString()
@@ -242,7 +237,7 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_personel.Text,
                                 Data_Urodzenia = data_urodzenia_personel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_personel.Text,
-                                /*Zdjecie = ??? ,*/
+                                //Zdjecie = new Uri(),
                                 Plec = plec_personel.Text,
                                 Info_Etat = info_etat_personel.Text,
                                 Opis = opis_stanowiska_personel.Text,
@@ -255,6 +250,7 @@ namespace Zadanie
                 }
             }
         }
+        /***********KLASY***********/
         public class Uczniowie
         {
             public string Imie { get; set; }
@@ -265,7 +261,7 @@ namespace Zadanie
             public string Imie_Rodzic_2 { get; set; }
             public string Data_Urodzenia { get; set; }
             public string Pesel { get; set; }
-            public string Zdjecie { get; set; }
+            public Uri Zdjecie { get; set; }
             public string Plec { get; set; }
             public string Klasa { get; set; }
             public string Grupa { get; set; }
@@ -283,7 +279,7 @@ namespace Zadanie
             public string Imie_Rodzic_2 { get; set; }
             public string Data_Urodzenia { get; set; }
             public string Pesel { get; set; }
-            public string Zdjecie { get; set; }
+            public Uri Zdjecie { get; set; }
             public string Plec { get; set; }
             public string Wychowawstwo { get; set; }
             public string Przedmioty { get; set; }
@@ -301,7 +297,7 @@ namespace Zadanie
             public string Imie_Rodzic_2 { get; set; }
             public string Data_Urodzenia { get; set; }
             public string Pesel { get; set; }
-            public string Zdjecie { get; set; }
+            public Uri Zdjecie { get; set; }
             public string Plec { get; set; }
             public string Info_Etat { get; set; }
             public string Opis { get; set; }
@@ -309,6 +305,7 @@ namespace Zadanie
 
         }
 
+        /***********USUWANIE***********/
         private void Usun_Click(object sender, RoutedEventArgs e)
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
@@ -349,6 +346,7 @@ namespace Zadanie
             }
         }
 
+        /***********EKSPORTOWANIE***********/
         private void Export_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -441,7 +439,7 @@ namespace Zadanie
 
 
 
-
+        /***********IMPORTOWANIE***********/
         private void Import_Click(object sender, RoutedEventArgs e)
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
@@ -524,6 +522,19 @@ namespace Zadanie
                             break;
                     };
                 }
+            }
+        }
+        
+        /***********PRZESYŁANIE ZDJĘCIA***********/
+        private void Zdjecie_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                //Zdjecie.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                zdj.Source = new BitmapImage(fileUri);
+                
             }
         }
     }

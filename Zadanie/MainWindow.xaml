@@ -19,7 +19,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_onClicik">Dodaj</Button>
+            <Button Width="100px" Height="25px" Margin="5px" Click="Dodaj_Clicik">Dodaj</Button>
             <Button Width="100px" Height="25px" Margin="5px" Click="Import_Click">Importuj</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
@@ -71,7 +71,16 @@
                             <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Path=Zdjecie}" Width="50"></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Zdjecie}" Width="50"></DataGridTextColumn>-->
+                            
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Name="zdj" Source="{Binding Zdjecie}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                                
                             <DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Klasa" IsReadOnly="True"  Binding="{Binding Path=Klasa}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grupa" IsReadOnly="True"  Binding="{Binding Path=Grupa}" Width="30"></DataGridTextColumn>
@@ -111,7 +120,9 @@
                     </StackPanel>
                     <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Zdjęcie" Width="175"/>
-                        <Button Width="100">Wybierz</Button>
+                        <Button Width="100" Click="Zdjecie_Click">
+                            <Image Name="zdj"></Image>
+                        </Button>
                     </StackPanel>
                     <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Płeć"  Width="175"/>
@@ -170,7 +181,16 @@
                             <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Path=Zdjecie}" Width="50"></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Image}" Width="50"></DataGridTextColumn>-->
+
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Name="zdj" Source="{Binding Zdjecie}"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
                             <DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Wychowawstwo" IsReadOnly="True"  Binding="{Binding Path=Wychowawstwo}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Przedmioty nauczania" IsReadOnly="True"  Binding="{Binding Path=Przedmioty}" Width="30"></DataGridTextColumn>
@@ -209,7 +229,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Zdjęcie" Width="175"/>
-                        <Button Width="100">Wybierz</Button>
+                        <Button Width="100" Click="Zdjecie_Click">Wybierz</Button>
                     </StackPanel>
                     <StackPanel Grid.Row="8" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Orientation="Horizontal">
                         <TextBlock Text="Płeć"  Width="175"/>
@@ -268,7 +288,16 @@
                             <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Path=Zdjecie}" Width="50"></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Image}" Width="50"></DataGridTextColumn>-->
+                            
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Name="zdj" Source="{Binding Zdjecie}"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
                             <DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Info etat" IsReadOnly="True"  Binding="{Binding Path=Info_Etat}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Opis stanowiska" IsReadOnly="True"  Binding="{Binding Path=Opis}" Width="30"></DataGridTextColumn>
