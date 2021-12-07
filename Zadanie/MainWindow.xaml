@@ -27,7 +27,18 @@
             <Button Width="100px" Height="25px" Margin="5px" Click="Export_Click">Eksportuj</Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Button Width="200" Height="50">Wyszukaj</Button>
+            <TextBlock Text="Wyszukaj po..." HorizontalAlignment="Center"></TextBlock>
+            <ComboBox SelectedIndex="0">
+                <ComboBoxItem>wartość</ComboBoxItem>
+                <ComboBoxItem>Imie</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+            </ComboBox>
+            <TextBox Width="200" Name="wyszukaj" KeyUp="TextBox_KeyUp"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
             <TextBlock Text="Eksport tylko z zaznaczonych" FontStyle="Italic" FontSize="10"></TextBlock>
@@ -63,7 +74,7 @@
 
                     <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_u">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
+                            <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
                             <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
                             <DataGridTextColumn Header="Nazwisko" IsReadOnly="True" Binding="{Binding Path=Nazwisko}" Width="75"></DataGridTextColumn>
                             <DataGridTextColumn Header="Nazwisko Panieńskie" IsReadOnly="True"  Binding="{Binding Path=Nazwisko_Panienskie}" Width="130"></DataGridTextColumn>
@@ -71,8 +82,8 @@
                             <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
                             <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
-                            <!--<DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Zdjecie}" Width="50"></DataGridTextColumn>-->
-                            
+                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Zdjecie}" Width="50"></DataGridTextColumn>-->
+
                             <DataGridTemplateColumn Header="Zdjęcie" Width="50" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -80,11 +91,11 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                                
-                            <DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
+
+                            <!--<DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Klasa" IsReadOnly="True"  Binding="{Binding Path=Klasa}" Width="30"></DataGridTextColumn>
                             <DataGridTextColumn Header="Grupa" IsReadOnly="True"  Binding="{Binding Path=Grupa}" Width="30"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Międzyklasa" IsReadOnly="True"  Binding="{Binding Path=Miedzyklasa}" Width="130"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Międzyklasa" IsReadOnly="True"  Binding="{Binding Path=Miedzyklasa}" Width="130"></DataGridTextColumn>-->
                         </DataGrid.Columns>
                     </DataGrid>
 

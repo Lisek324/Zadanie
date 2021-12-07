@@ -28,6 +28,8 @@ namespace Zadanie
     public partial class MainWindow : Window
     {
 
+        List<Uczniowie> lista_u = new List<Uczniowie>();
+        List<Uczniowie> filterModeLisst = new List<Uczniowie>();
 
         public MainWindow()
         {
@@ -35,12 +37,6 @@ namespace Zadanie
             InitializeComponent();
         }
 
-        List<Uczniowie> lista = new List<Uczniowie>();
-
-        private void Zadanie_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -136,8 +132,14 @@ namespace Zadanie
                                 Klasa = klasa_uczen.Text,
                                 Grupa = grupa_uczen.Text,
                                 Miedzyklasa = miedzyklasa_uczen.Text
+                                
                             };
-                            datagrid_u.Items.Add(data);
+                            /*Menu myMenu = (Menu)this.myDataGrid.Template.FindName("menuColumnOptions", this.datagrid_u);
+                            menu.Visibility = System.Windows.Visibility.Visible;*/
+                            //datagrid_u.Items.Add(data);
+                            lista_u.Add(data);
+                            datagrid_u.ItemsSource = null;
+                            datagrid_u.ItemsSource = lista_u;
                         }
                         czydodac = true;
                         break;
@@ -237,7 +239,7 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_personel.Text,
                                 Data_Urodzenia = data_urodzenia_personel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_personel.Text,
-                                //Zdjecie = new Uri(),
+                                Zdjecie = new Uri(zdj.Source.ToString()),
                                 Plec = plec_personel.Text,
                                 Info_Etat = info_etat_personel.Text,
                                 Opis = opis_stanowiska_personel.Text,
@@ -315,7 +317,7 @@ namespace Zadanie
                 case "Uczniowie":
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        for (int i = 0; i <= datagrid_u.SelectedItems.Count; i++)
+                        for (int i = 0; i <= datagrid_u.SelectedItems.Count; i++)//do poprawy
                         {
                             datagrid_u.Items.Remove(datagrid_u.SelectedItem);
                         }
@@ -396,7 +398,7 @@ namespace Zadanie
                                 + nauczyciele.Imie_Rodzic_2 + " "
                                 + nauczyciele.Data_Urodzenia + " "
                                 + nauczyciele.Pesel + " "
-                                //+ uczniowie.Zdjecie + " "
+                                //+ nauczyciele.Zdjecie + " "
                                 + nauczyciele.Plec + " "
                                 + nauczyciele.Wychowawstwo + " "
                                 + nauczyciele.Przedmioty + " "
@@ -420,7 +422,7 @@ namespace Zadanie
                                 + personel.Imie_Rodzic_2 + " "
                                 + personel.Data_Urodzenia + " "
                                 + personel.Pesel + " "
-                                //+ uczniowie.Zdjecie + " "
+                                //+ personel.Zdjecie + " "
                                 + personel.Plec + " "
                                 + personel.Info_Etat + " "
                                 + personel.Opis + " "
@@ -531,11 +533,36 @@ namespace Zadanie
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                //Zdjecie.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 Uri fileUri = new Uri(openFileDialog.FileName);
                 zdj.Source = new BitmapImage(fileUri);
                 
             }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            var filtered = lista_u.Where(a => a.Imie.StartsWith(wyszukaj.Text));
+            datagrid_u.ItemsSource = filtered;
+            /*filterModeLisst.Clear();
+
+            if (wyszukaj.Text.Equals(""))
+            {
+                filterModeLisst.AddRange(lista_u);
+            }
+            else
+            {
+                foreach (Uczniowie u in lista_u)
+                {
+
+                    if (u.Imie.Contains(wyszukaj.Text))
+                    {
+                        filterModeLisst.Add(u);
+                    }
+                }
+            }
+            datagrid_u.ItemsSource = null;
+            datagrid_u.ItemsSource = filterModeLisst.ToList();*/
+
         }
     }
 }
