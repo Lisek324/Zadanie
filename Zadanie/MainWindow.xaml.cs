@@ -29,7 +29,8 @@ namespace Zadanie
     {
 
         List<Uczniowie> lista_u = new List<Uczniowie>();
-        List<Uczniowie> filterModeLisst = new List<Uczniowie>();
+        List<Nauczyciele> lista_n = new List<Nauczyciele>();
+        List<Personel> lista_p = new List<Personel>();
 
         public MainWindow()
         {
@@ -103,17 +104,22 @@ namespace Zadanie
                                 break;
                             };
                         }
+                        if (zdjecie_u.Source == null) 
+                        {
+                            MessageBox.Show("Nie przesłano zdjęcia");
+                            czydodac = false;
+                        }
                         if (data_urodzenia_uczen.SelectedDate == null)
                         {
                             MessageBox.Show("Wybierz datę urodzenia ucznia");
                             czydodac = false;
                         }
+                        
                         else if (data_urodzenia_uczen.SelectedDate.Value.AddYears(6) > DateTime.Now)
                         {
                             MessageBox.Show("Aby być uczniem w tej szkole, trzeba mieć skończone conajmniej 6 lat");
                             czydodac = false;
                         }
-
                         if (czydodac)
                         {
                             /*dodawanie do datagrid rekordów*/
@@ -127,16 +133,13 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_uczen.Text,
                                 Data_Urodzenia = data_urodzenia_uczen.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_uczen.Text,
-                                Zdjecie = new Uri(zdj.Source.ToString()),
+                                Zdjecie = new Uri(zdjecie_u.Source.ToString()),
                                 Plec = plec_uczen.Text,
                                 Klasa = klasa_uczen.Text,
                                 Grupa = grupa_uczen.Text,
                                 Miedzyklasa = miedzyklasa_uczen.Text
                                 
                             };
-                            /*Menu myMenu = (Menu)this.myDataGrid.Template.FindName("menuColumnOptions", this.datagrid_u);
-                            menu.Visibility = System.Windows.Visibility.Visible;*/
-                            //datagrid_u.Items.Add(data);
                             lista_u.Add(data);
                             datagrid_u.ItemsSource = null;
                             datagrid_u.ItemsSource = lista_u;
@@ -163,6 +166,11 @@ namespace Zadanie
                                 break;
                             }
                         }
+                        if (zdjecie_n.Source == null)
+                        {
+                            MessageBox.Show("Nie przesłano zdjęcia");
+                            czydodac = false;
+                        }
                         if (data_urodzenia_nauczyciel.SelectedDate == null)
                         {
                             MessageBox.Show("Wybierz datę urodzenia nauczyciela");
@@ -186,13 +194,15 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_nauczyciel.Text,
                                 Data_Urodzenia = data_urodzenia_nauczyciel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_nauczyciel.Text,
-                                /*Zdjecie = ??? ,*/
+                                Zdjecie =new Uri(zdjecie_n.Source.ToString()),
                                 Plec = plec_nauczyciel.Text,
                                 Wychowawstwo = wychowawstwo_nauczyciel.IsChecked.Value.ToString(),
                                 Przedmioty = przedmiot_nauczania_nauczyciel.Text,
                                 Data_Zatrudnienia = data_zatrudnienia_nauczyciel.SelectedDate.Value.Date.ToShortDateString()
                             };
-                            datagrid_n.Items.Add(data);
+                            lista_n.Add(data);
+                            datagrid_n.ItemsSource = null;
+                            datagrid_n.ItemsSource = lista_n;
                         }
                         czydodac = true;
                         break;
@@ -215,6 +225,11 @@ namespace Zadanie
                                 czydodac = false;
                                 break;
                             }
+                        }
+                        if (zdjecie_p.Source == null)
+                        {
+                            MessageBox.Show("Nie przesłano zdjęcia");
+                            czydodac = false;
                         }
                         if (data_urodzenia_personel.SelectedDate == null)
                         {
@@ -239,13 +254,15 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_personel.Text,
                                 Data_Urodzenia = data_urodzenia_personel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_personel.Text,
-                                Zdjecie = new Uri(zdj.Source.ToString()),
+                                Zdjecie = new Uri(zdjecie_p.Source.ToString()),
                                 Plec = plec_personel.Text,
                                 Info_Etat = info_etat_personel.Text,
                                 Opis = opis_stanowiska_personel.Text,
                                 Data_Zatrudnienia = data_zatrudnienia_personel.SelectedDate.Value.Date.ToShortDateString(),
                             };
-                            datagrid_p.Items.Add(data);
+                            lista_p.Add(data);
+                            datagrid_p.ItemsSource = null;
+                            datagrid_p.ItemsSource = lista_p;
                         }
                         czydodac = true;
                         break;
@@ -304,7 +321,7 @@ namespace Zadanie
             public string Info_Etat { get; set; }
             public string Opis { get; set; }
             public string Data_Zatrudnienia { get; set; }
-
+            
         }
 
         /***********USUWANIE***********/
@@ -314,32 +331,33 @@ namespace Zadanie
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: " + ti.Header + "?", "Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
             switch (ti.Header)
             {
+
                 case "Uczniowie":
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        for (int i = 0; i <= datagrid_u.SelectedItems.Count; i++)//do poprawy
+                        for (int i = datagrid_u.SelectedItems.Count - 1; i >= 0; i--)
                         {
-                            datagrid_u.Items.Remove(datagrid_u.SelectedItem);
+                            //lista_u.Remove(i);
+                            datagrid_u.ItemsSource = null;
+                            datagrid_u.ItemsSource = lista_u;
                         }
                     }
                     break;
                 case "Nauczyciele":
 
-                    if (messageBoxResult == MessageBoxResult.Yes)
+                    if (messageBoxResult == MessageBoxResult.Yes && datagrid_n.SelectedIndex != -1)
                     {
-                        for (int i = 0; i <= datagrid_p.SelectedItems.Count; i++)
-                        {
-                            datagrid_n.Items.Remove(datagrid_n.SelectedItem);
-                        }
+                        //lista_u.Remove(datagrid_n);
+                        datagrid_n.ItemsSource = null;
+                        datagrid_n.ItemsSource = lista_n;
                     }
                     break;
                 case "Personel":
-                    if (messageBoxResult == MessageBoxResult.Yes)
+                    if (messageBoxResult == MessageBoxResult.Yes && datagrid_p.SelectedIndex != -1)
                     {
-                        for (int i = 0; i <= datagrid_p.SelectedItems.Count; i++)
-                        {
-                            datagrid_p.Items.Remove(datagrid_p.SelectedItem);
-                        }
+                        lista_u.RemoveAt(datagrid_p.SelectedIndex);
+                        datagrid_p.ItemsSource = null;
+                        datagrid_p.ItemsSource = lista_p;
                     }
                     break;
                 default:
@@ -362,7 +380,7 @@ namespace Zadanie
                     case "Uczniowie":
 
                         Uczniowie uczniowie = new Uczniowie();
-                        foreach (var obj in datagrid_u.SelectedItems)
+                        foreach (var obj in datagrid_u.Items)
                         {
 
                             uczniowie = obj as Uczniowie;
@@ -386,7 +404,7 @@ namespace Zadanie
 
                     case "Nauczyciele":
                         Nauczyciele nauczyciele = new Nauczyciele();
-                        foreach (var obj in datagrid_n.SelectedItems)
+                        foreach (var obj in datagrid_n.Items)
                         {
 
                             nauczyciele = obj as Nauczyciele;
@@ -410,7 +428,7 @@ namespace Zadanie
 
                     case "Personel":
 
-                        foreach (var obj in datagrid_u.SelectedItems)
+                        foreach (var obj in datagrid_u.Items)
                         {
                             Personel personel = new Personel();
                             personel = obj as Personel;
@@ -482,7 +500,10 @@ namespace Zadanie
                                 Grupa = row[10],
                                 Miedzyklasa = row[11]
                             };
-                            datagrid_u.Items.Add(data_u);
+                            lista_u.Add(data_u);
+                            datagrid_u.ItemsSource = null;
+                            datagrid_u.ItemsSource = lista_u;
+                            //datagrid_u.Items.Add(data_u);
                             break;
 
                         case "Nauczyciele":
@@ -501,7 +522,10 @@ namespace Zadanie
                                 Przedmioty = row[10],
                                 Data_Zatrudnienia = row[11]
                             };
-                            datagrid_n.Items.Add(data_n);
+                            lista_n.Add(data_n);
+                            datagrid_n.ItemsSource = null;
+                            datagrid_n.ItemsSource = lista_n;
+                            //datagrid_n.Items.Add(data_n);
                             break;
 
                         case "Personel":
@@ -520,7 +544,10 @@ namespace Zadanie
                                 Opis = row[10],
                                 Data_Zatrudnienia = row[11]
                             };
-                            datagrid_p.Items.Add(data_p);
+                            lista_p.Add(data_p);
+                            datagrid_p.ItemsSource = null;
+                            datagrid_p.ItemsSource = lista_p;
+                            //datagrid_p.Items.Add(data_p);
                             break;
                     };
                 }
@@ -530,12 +557,26 @@ namespace Zadanie
         /***********PRZESYŁANIE ZDJĘCIA***********/
         private void Zdjecie_Click(object sender, RoutedEventArgs e)
         {
+            TabItem ti = Tabs.SelectedItem as TabItem;
+
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                zdj.Source = new BitmapImage(fileUri);
-                
+                switch (ti.Header)
+                {
+                    case "Uczniowie":
+                        Uri fileUriu = new Uri(openFileDialog.FileName);
+                        zdjecie_u.Source = new BitmapImage(fileUriu);
+                        break;
+                    case "Nauczyciele":
+                        Uri fileUrin = new Uri(openFileDialog.FileName);
+                        zdjecie_n.Source = new BitmapImage(fileUrin);
+                        break;
+                    case "Personel":
+                        Uri fileUrip = new Uri(openFileDialog.FileName);
+                        zdjecie_p.Source = new BitmapImage(fileUrip);
+                        break;
+                }
             }
         }
 
@@ -543,26 +584,6 @@ namespace Zadanie
         {
             var filtered = lista_u.Where(a => a.Imie.StartsWith(wyszukaj.Text));
             datagrid_u.ItemsSource = filtered;
-            /*filterModeLisst.Clear();
-
-            if (wyszukaj.Text.Equals(""))
-            {
-                filterModeLisst.AddRange(lista_u);
-            }
-            else
-            {
-                foreach (Uczniowie u in lista_u)
-                {
-
-                    if (u.Imie.Contains(wyszukaj.Text))
-                    {
-                        filterModeLisst.Add(u);
-                    }
-                }
-            }
-            datagrid_u.ItemsSource = null;
-            datagrid_u.ItemsSource = filterModeLisst.ToList();*/
-
         }
     }
 }
