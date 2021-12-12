@@ -34,9 +34,9 @@ namespace Zadanie
 
         public MainWindow()
         {
-
             InitializeComponent();
         }
+
 
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -104,7 +104,7 @@ namespace Zadanie
                                 break;
                             };
                         }
-                        if (zdjecie_u.Source == null) 
+                        if (zdjecie_u.Source == null)
                         {
                             MessageBox.Show("Nie przesłano zdjęcia");
                             czydodac = false;
@@ -114,7 +114,7 @@ namespace Zadanie
                             MessageBox.Show("Wybierz datę urodzenia ucznia");
                             czydodac = false;
                         }
-                        
+
                         else if (data_urodzenia_uczen.SelectedDate.Value.AddYears(6) > DateTime.Now)
                         {
                             MessageBox.Show("Aby być uczniem w tej szkole, trzeba mieć skończone conajmniej 6 lat");
@@ -138,11 +138,12 @@ namespace Zadanie
                                 Klasa = klasa_uczen.Text,
                                 Grupa = grupa_uczen.Text,
                                 Miedzyklasa = miedzyklasa_uczen.Text
-                                
+
                             };
                             lista_u.Add(data);
                             datagrid_u.ItemsSource = null;
                             datagrid_u.ItemsSource = lista_u;
+
                         }
                         czydodac = true;
                         break;
@@ -194,7 +195,7 @@ namespace Zadanie
                                 Imie_Rodzic_2 = imie_rodzic_2_nauczyciel.Text,
                                 Data_Urodzenia = data_urodzenia_nauczyciel.SelectedDate.Value.Date.ToShortDateString(),
                                 Pesel = pesel_nauczyciel.Text,
-                                Zdjecie =new Uri(zdjecie_n.Source.ToString()),
+                                Zdjecie = new Uri(zdjecie_n.Source.ToString()),
                                 Plec = plec_nauczyciel.Text,
                                 Wychowawstwo = wychowawstwo_nauczyciel.IsChecked.Value.ToString(),
                                 Przedmioty = przedmiot_nauczania_nauczyciel.Text,
@@ -238,7 +239,7 @@ namespace Zadanie
                         }
                         if (data_urodzenia_personel.SelectedDate.Value.AddYears(18) > DateTime.Now)
                         {
-                            MessageBox.Show("Jako nieletni nikt by nie chiał pracować w tej budzie");
+                            MessageBox.Show("Osoba musi być pełnoletnia");
                             czydodac = false;
                         }
 
@@ -321,47 +322,42 @@ namespace Zadanie
             public string Info_Etat { get; set; }
             public string Opis { get; set; }
             public string Data_Zatrudnienia { get; set; }
-            
+
         }
 
         /***********USUWANIE***********/
         private void Usun_Click(object sender, RoutedEventArgs e)
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Czy chcesz usunąć rekord z tabeli: " + ti.Header + "?", "Potwierdzenie usunięcia", System.Windows.MessageBoxButton.YesNo);
             switch (ti.Header)
             {
 
                 case "Uczniowie":
-                    if (messageBoxResult == MessageBoxResult.Yes)
+                    for (int i = datagrid_u.SelectedItems.Count - 1; i >= 0; i--)
                     {
-                        for (int i = datagrid_u.SelectedItems.Count - 1; i >= 0; i--)
-                        {
-                            //lista_u.Remove(i);
-                            datagrid_u.ItemsSource = null;
-                            datagrid_u.ItemsSource = lista_u;
-                        }
+                        lista_u.RemoveAt(i);
+                        datagrid_u.ItemsSource = null;
+                        datagrid_u.ItemsSource = lista_u;
+                        wyszukaj.Text = "";
                     }
                     break;
                 case "Nauczyciele":
-
-                    if (messageBoxResult == MessageBoxResult.Yes && datagrid_n.SelectedIndex != -1)
+                    for (int i = datagrid_u.SelectedItems.Count - 1; i >= 0; i--)
                     {
-                        //lista_u.Remove(datagrid_n);
+                        lista_u.RemoveAt(i);
                         datagrid_n.ItemsSource = null;
                         datagrid_n.ItemsSource = lista_n;
+                        wyszukaj.Text = "";
                     }
                     break;
                 case "Personel":
-                    if (messageBoxResult == MessageBoxResult.Yes && datagrid_p.SelectedIndex != -1)
+                    for (int i = datagrid_u.SelectedItems.Count - 1; i >= 0; i--)
                     {
-                        lista_u.RemoveAt(datagrid_p.SelectedIndex);
+                        lista_u.RemoveAt(i);
                         datagrid_p.ItemsSource = null;
                         datagrid_p.ItemsSource = lista_p;
+                        wyszukaj.Text = "";
                     }
-                    break;
-                default:
-                    MessageBox.Show("nie zaznaczono wiersza");
                     break;
             }
         }
@@ -380,7 +376,7 @@ namespace Zadanie
                     case "Uczniowie":
 
                         Uczniowie uczniowie = new Uczniowie();
-                        foreach (var obj in datagrid_u.Items)
+                        foreach (var obj in datagrid_u.ItemsSource)
                         {
 
                             uczniowie = obj as Uczniowie;
@@ -404,7 +400,7 @@ namespace Zadanie
 
                     case "Nauczyciele":
                         Nauczyciele nauczyciele = new Nauczyciele();
-                        foreach (var obj in datagrid_n.Items)
+                        foreach (var obj in datagrid_n.ItemsSource)
                         {
 
                             nauczyciele = obj as Nauczyciele;
@@ -428,7 +424,7 @@ namespace Zadanie
 
                     case "Personel":
 
-                        foreach (var obj in datagrid_u.Items)
+                        foreach (var obj in datagrid_u.ItemsSource)
                         {
                             Personel personel = new Personel();
                             personel = obj as Personel;
@@ -503,7 +499,6 @@ namespace Zadanie
                             lista_u.Add(data_u);
                             datagrid_u.ItemsSource = null;
                             datagrid_u.ItemsSource = lista_u;
-                            //datagrid_u.Items.Add(data_u);
                             break;
 
                         case "Nauczyciele":
@@ -525,7 +520,6 @@ namespace Zadanie
                             lista_n.Add(data_n);
                             datagrid_n.ItemsSource = null;
                             datagrid_n.ItemsSource = lista_n;
-                            //datagrid_n.Items.Add(data_n);
                             break;
 
                         case "Personel":
@@ -547,13 +541,12 @@ namespace Zadanie
                             lista_p.Add(data_p);
                             datagrid_p.ItemsSource = null;
                             datagrid_p.ItemsSource = lista_p;
-                            //datagrid_p.Items.Add(data_p);
                             break;
                     };
                 }
             }
         }
-        
+
         /***********PRZESYŁANIE ZDJĘCIA***********/
         private void Zdjecie_Click(object sender, RoutedEventArgs e)
         {
@@ -582,8 +575,141 @@ namespace Zadanie
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            var filtered = lista_u.Where(a => a.Imie.StartsWith(wyszukaj.Text));
-            datagrid_u.ItemsSource = filtered;
+            TabItem ti = Tabs.SelectedItem as TabItem;
+            //Jeśli moje zdrowie psychiczne się poprawi, warto byłoby to poprawić
+            switch (ti.Header)
+            {
+                case "Uczniowie":
+                    switch (cmbbx.Text)
+                    {
+                        case "Imie":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Drugie Imie":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Drugie_Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwisko":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Nazwisko.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwisko Panieńskie":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Nazwisko_Panienskie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 1":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Imie_Rodzic_1.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 2":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Imie_Rodzic_2.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Data Urodzenia":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Data_Urodzenia.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Pesel":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Pesel.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Płeć":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Plec.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Klasa":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Klasa.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Grupa":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Grupa.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Międzyklasa":
+                            datagrid_u.ItemsSource = lista_u.Where(uczen => uczen.Miedzyklasa.StartsWith(wyszukaj.Text));
+                            break;
+                    }
+                    break;
+                case "Nauczyciele":
+                    switch (cmbbx.Text) 
+                    {
+                        case "Imie":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Drugie Imie":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Drugie_Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwisko":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Nazwisko.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwisko Panieńskie":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Nazwisko_Panienskie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 1":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Imie_Rodzic_1.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 2":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Imie_Rodzic_2.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Data Urodzenia":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Data_Urodzenia.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Pesel":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Pesel.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Płeć":
+                            datagrid_n.ItemsSource = lista_n.Where(uczen => uczen.Plec.StartsWith(wyszukaj.Text));
+                            break;
+                    }
+                    break;
+                case "Personel":
+                    switch (cmbbx.Text) 
+                    {
+                        case "Imie":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Drugie Imie":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Drugie_Imie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwiskp":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Nazwisko.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Nazwisko Panieńskie":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Nazwisko_Panienskie.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 1":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Imie_Rodzic_1.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Imie Rodzic 2":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Imie_Rodzic_2.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Data Urodzenia":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Data_Urodzenia.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Pesel":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Pesel.StartsWith(wyszukaj.Text));
+                            break;
+                        case "Płeć":
+                            datagrid_p.ItemsSource = lista_p.Where(uczen => uczen.Plec.StartsWith(wyszukaj.Text));
+                            break;
+                    }
+                    break;
+            }
+
+            if (wyszukaj.Text == "")
+            {
+                datagrid_u.ItemsSource = lista_u;
+                zablokowane.Visibility = Visibility.Hidden;
+            }
+            else if (wyszukaj.Text != "")
+            {
+                zablokowane.Visibility = Visibility.Visible;
+                datagrid_u.IsReadOnly = true;
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 sw = new Window1();
+            sw.Show();
+        }
+
+        private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                TabItem ti = Tabs.SelectedItem as TabItem;
+            
+            wyszukaj.Text = "";
         }
     }
 }

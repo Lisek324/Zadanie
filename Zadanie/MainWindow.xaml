@@ -28,17 +28,35 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center">
             <TextBlock Text="Wyszukaj po..." HorizontalAlignment="Center"></TextBlock>
-            <ComboBox SelectedIndex="0">
-                <ComboBoxItem>wartość</ComboBoxItem>
+            
+            <ComboBox SelectedIndex="0" x:Name="cmbbx">
+                <ComboBoxItem IsEnabled="False">...</ComboBoxItem>
                 <ComboBoxItem>Imie</ComboBoxItem>
+                <ComboBoxItem>Drugie Imie</ComboBoxItem>
                 <ComboBoxItem>Nazwisko</ComboBoxItem>
-                <ComboBoxItem>Nazwisko</ComboBoxItem>
-                <ComboBoxItem>Nazwisko</ComboBoxItem>
-                <ComboBoxItem>Nazwisko</ComboBoxItem>
-                <ComboBoxItem>Nazwisko</ComboBoxItem>
-                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko Panieńskie</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 1</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 2</ComboBoxItem>
+                <ComboBoxItem>Data Urodzenia</ComboBoxItem>
+                <ComboBoxItem>Płeć</ComboBoxItem>
+                <ComboBoxItem>Klasa</ComboBoxItem>
+                <ComboBoxItem>Grupa</ComboBoxItem>
+                <ComboBoxItem>Międzyklasa</ComboBoxItem>
+                <ComboBox.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ComboBox.GroupStyle>
             </ComboBox>
+            
             <TextBox Width="200" Name="wyszukaj" KeyUp="TextBox_KeyUp"></TextBox>
+
+            <!--<Button Click="Button_Click">wyszukaj</Button>-->
+
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
             <TextBlock Text="Eksport tylko z zaznaczonych" FontStyle="Italic" FontSize="10"></TextBlock>
@@ -46,8 +64,12 @@
             <TextBlock Text="*-pola niewymagane" FontStyle="Italic" FontSize="10"></TextBlock>
         </StackPanel>
 
+        <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">
+            <TextBlock Name="zablokowane" Visibility="Hidden" FontSize="10px" Foreground="Red" >Edytowanie wierszy zablkokowane</TextBlock>
+        </StackPanel>
 
-        <TabControl Margin="0,0,0,75" Grid.ColumnSpan="4" TabIndex="0" Name="Tabs">
+
+        <TabControl Margin="0,0,0,75" Grid.ColumnSpan="4" TabIndex="0" Name="Tabs" SelectionChanged="Tabs_SelectionChanged">
 
             <!--Uczniowie-->
             <TabItem Header="Uczniowie">
@@ -72,7 +94,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_u">
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_u" ItemsSource="{Binding Uczniowie}" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
                             <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
@@ -183,7 +205,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_n">
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_n" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
                             <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
@@ -292,7 +314,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_p">
+                    <DataGrid Grid.Column="1" Grid.RowSpan="12" Name="datagrid_p" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
                             <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>

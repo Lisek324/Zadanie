@@ -17,9 +17,19 @@ namespace Zadanie
     /// </summary>
     public partial class Window1 : Window
     {
+
+        //MainWindow.datagrid2 
         public Window1()
         {
+
+
             InitializeComponent();
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

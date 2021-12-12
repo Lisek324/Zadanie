@@ -5,8 +5,246 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadanie"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="400" Width="800"
+        Loaded="Window_Loaded">
     <Grid>
-        
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+        <TextBlock>Wyszukaj w tabeli</TextBlock>
+        <ComboBox Margin="5px" SelectionChanged="ComboBox_SelectionChanged" Name="tabela">
+            <ComboBoxItem>Uczniowie</ComboBoxItem>
+            <ComboBoxItem>Nauczyciele</ComboBoxItem>
+            <ComboBoxItem>Personel</ComboBoxItem>
+        </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <ComboBox Margin="5px" IsEnabled="False" Name="uczniowie_war">
+                <ComboBoxItem IsEnabled="False">wartość</ComboBoxItem>
+                <ComboBoxItem>Imie</ComboBoxItem>
+                <ComboBoxItem>Drugie Imie</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko Panieńskie</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 1</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 2</ComboBoxItem>
+                <ComboBoxItem>Data Urodzenia</ComboBoxItem>
+                <ComboBoxItem>Płeć</ComboBoxItem>
+                <ComboBoxItem>Klasa</ComboBoxItem>
+                <ComboBoxItem>Grupa</ComboBoxItem>
+                <ComboBoxItem>Międzyklasa</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <ComboBox Margin="5px" IsEnabled="False" Name="Nauczyciel_war">
+                <ComboBoxItem IsEnabled="False">wartość</ComboBoxItem>
+                <ComboBoxItem>Imie</ComboBoxItem>
+                <ComboBoxItem>Drugie Imie</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko Panieńskie</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 1</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 2</ComboBoxItem>
+                <ComboBoxItem>Data Urodzenia</ComboBoxItem>
+                <ComboBoxItem>Płeć</ComboBoxItem>
+                <ComboBoxItem>Wychowawstwo</ComboBoxItem>
+                <ComboBoxItem>Przedmioty Nauczania</ComboBoxItem>
+                <ComboBoxItem>Data Zatrudnienia</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <ComboBox Margin="5px" IsEnabled="False" Name="Personel_war">
+                <ComboBoxItem IsEnabled="False">wartość</ComboBoxItem>
+                <ComboBoxItem>Imie</ComboBoxItem>
+                <ComboBoxItem>Drugie Imie</ComboBoxItem>
+                <ComboBoxItem>Nazwisko</ComboBoxItem>
+                <ComboBoxItem>Nazwisko Panieńskie</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 1</ComboBoxItem>
+                <ComboBoxItem>Imie rodzica 2</ComboBoxItem>
+                <ComboBoxItem>Data Urodzenia</ComboBoxItem>
+                <ComboBoxItem>Płeć</ComboBoxItem>
+                <ComboBoxItem>Informacje o Etacie</ComboBoxItem>
+                <ComboBoxItem>Opis</ComboBoxItem>
+                <ComboBoxItem>Data Zatrudnienia</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Button Click="Button_Click" IsEnabled="False">Wyszukaj</Button>
+        </StackPanel>
+        -->
+
+        <TabControl Margin="0,0,0,75" Grid.ColumnSpan="4" TabIndex="0" Name="Tabs">
+
+            <!--Uczniowie-->
+            <TabItem Header="Uczniowie">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="0" Grid.RowSpan="13" Name="datagrid_u" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko" IsReadOnly="True" Binding="{Binding Path=Nazwisko}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko Panieńskie" IsReadOnly="True"  Binding="{Binding Path=Nazwisko_Panienskie}" Width="130"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 1" IsReadOnly="True" Binding="{Binding Path=Imie_Rodzic_1}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Zdjecie}" Width="50"></DataGridTextColumn>-->
+
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Source="{Binding Zdjecie}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!--<DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Klasa" IsReadOnly="True"  Binding="{Binding Path=Klasa}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Grupa" IsReadOnly="True"  Binding="{Binding Path=Grupa}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Międzyklasa" IsReadOnly="True"  Binding="{Binding Path=Miedzyklasa}" Width="130"></DataGridTextColumn>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!--Nauczyciele-->
+            <TabItem Header="Nauczyciele">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="249*"/>
+                        <ColumnDefinition Width="505*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="0" Grid.RowSpan="13" Name="datagrid_n" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko" IsReadOnly="True" Binding="{Binding Path=Nazwisko}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko Panieńskie" IsReadOnly="True"  Binding="{Binding Path=Nazwisko_Panienskie}" Width="130"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 1" IsReadOnly="True" Binding="{Binding Path=Imie_Rodzic_1}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Image}" Width="50"></DataGridTextColumn>-->
+
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Name="zdjecie_n" Source="{Binding Zdjecie}"  />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!--<DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Wychowawstwo" IsReadOnly="True"  Binding="{Binding Path=Wychowawstwo}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Przedmioty nauczania" IsReadOnly="True"  Binding="{Binding Path=Przedmioty}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data zatr." IsReadOnly="True"  Binding="{Binding Path=Data_Zatrudnienia}" Width="130"></DataGridTextColumn>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+
+            <!--Personel-->
+            <TabItem Header="Personel">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.75*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Column="0" Grid.RowSpan="13" Name="datagrid_p" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <!--<DataGridTextColumn Header="Imie" IsReadOnly="True" Binding="{Binding Path=Imie}" Width="50"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Drugie imie" IsReadOnly="True"  Binding="{Binding Path=Drugie_Imie}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko" IsReadOnly="True" Binding="{Binding Path=Nazwisko}" Width="75"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nazwisko Panieńskie" IsReadOnly="True"  Binding="{Binding Path=Nazwisko_Panienskie}" Width="130"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 1" IsReadOnly="True" Binding="{Binding Path=Imie_Rodzic_1}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Imie rodzica 2" IsReadOnly="True"  Binding="{Binding Path=Imie_Rodzic_2}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data urodzenia" IsReadOnly="True" Binding="{Binding Path=Data_Urodzenia}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Pesel" IsReadOnly="True"  Binding="{Binding Path=Pesel}" Width="100"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Zdjęcie" IsReadOnly="True" Binding="{Binding Image}" Width="50"></DataGridTextColumn>-->
+
+                            <DataGridTemplateColumn Header="Zdjęcie" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Height="25" Width="50" Name="zdjecie_p" Source="{Binding Zdjecie}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!--<DataGridTextColumn Header="Płeć" IsReadOnly="True"  Binding="{Binding Path=Plec}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Info etat" IsReadOnly="True"  Binding="{Binding Path=Info_Etat}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Opis stanowiska" IsReadOnly="True"  Binding="{Binding Path=Opis}" Width="30"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Data zatr." IsReadOnly="True"  Binding="{Binding Path=Data_Zatrudnienia}" Width="130"></DataGridTextColumn>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
