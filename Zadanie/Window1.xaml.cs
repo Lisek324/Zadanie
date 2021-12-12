@@ -22,7 +22,6 @@ namespace Zadanie
         public Window1()
         {
 
-
             InitializeComponent();
 
         }

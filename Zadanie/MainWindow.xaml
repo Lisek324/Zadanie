@@ -58,10 +58,8 @@
             <!--<Button Click="Button_Click">wyszukaj</Button>-->
 
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
-            <TextBlock Text="Eksport tylko z zaznaczonych" FontStyle="Italic" FontSize="10"></TextBlock>
-            <TextBlock Text="wierszy" FontStyle="Italic" FontSize="10"></TextBlock>
-            <TextBlock Text="*-pola niewymagane" FontStyle="Italic" FontSize="10"></TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button Click="About_Click" Width="20px" Margin="5px">?</Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left">

@@ -1,7 +1,5 @@
 ﻿/**
- * warunek czy zdjęcie zostało przesłane
- * stworzenie wyszukiwarki
- * wychowanie zamiast True wpisuje TAK
+ * poprawienie wyszukiwarki
  */
 using System;
 using System.Collections.Generic;
@@ -46,7 +44,7 @@ namespace Zadanie
         }
 
         bool czydodac = true;
-
+        string wychowawstwo = "";
         /***********DODAWANIE DO REKORDÓW***********/
         private void Dodaj_Clicik(object sender, RoutedEventArgs e)
         {
@@ -183,6 +181,12 @@ namespace Zadanie
                             czydodac = false;
                         }
 
+                        if (wychowawstwo_nauczyciel.IsChecked.Value)
+                        {
+                            wychowawstwo = "TAK";
+                        }
+                        else wychowawstwo = "NIE";
+
                         if (czydodac)
                         {
                             var data = new Nauczyciele
@@ -197,7 +201,7 @@ namespace Zadanie
                                 Pesel = pesel_nauczyciel.Text,
                                 Zdjecie = new Uri(zdjecie_n.Source.ToString()),
                                 Plec = plec_nauczyciel.Text,
-                                Wychowawstwo = wychowawstwo_nauczyciel.IsChecked.Value.ToString(),
+                                Wychowawstwo = wychowawstwo,
                                 Przedmioty = przedmiot_nauczania_nauczyciel.Text,
                                 Data_Zatrudnienia = data_zatrudnienia_nauczyciel.SelectedDate.Value.Date.ToShortDateString()
                             };
@@ -206,6 +210,7 @@ namespace Zadanie
                             datagrid_n.ItemsSource = lista_n;
                         }
                         czydodac = true;
+                        wychowawstwo = "";
                         break;
 
                     case "Personel":
@@ -460,7 +465,7 @@ namespace Zadanie
         {
             TabItem ti = Tabs.SelectedItem as TabItem;
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-
+            openFileDialog.Filter = "Pliki tekstowe (*.txt)|*.txt";
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -710,6 +715,15 @@ namespace Zadanie
                 TabItem ti = Tabs.SelectedItem as TabItem;
             
             wyszukaj.Text = "";
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "pola oznaczone gwiazdką '*' nie są wymagane wo wypełnienia."+"\n"+
+                "Importowanie tylko z plików tekstowych"+"\n"+
+                "Eksportowanie - do pliku txt."+"\n"+
+                "Usuwanie wierszy za pomocą przycisku usuń lub klawisza Delete. W przypadku użycia wyszukiwarki, działać będzie tylko przycisk usuń.");
         }
     }
 }
