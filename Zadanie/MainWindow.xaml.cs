@@ -62,7 +62,7 @@ namespace Zadanie
             DatePicker[] formdatepicker_u = { data_urodzenia_uczen };//i to też
 
             TextBox[] formtxtbox_n = { imie_nauczyciel, nazwisko_nauczyciel, imie_rodzic_1_nauczyciel, imie_rodzic_2_nauczyciel, pesel_nauczyciel, przedmiot_nauczania_nauczyciel };
-            ComboBox[] formcombobox_n = { plec_nauczyciel };//co ja robie
+            ComboBox[] formcombobox_n = { plec_nauczyciel };
             DatePicker[] formdatepicker_n = { data_urodzenia_nauczyciel, data_zatrudnienia_nauczyciel };
 
             TextBox[] formtxtbox_p = { imie_personel, nazwisko_personel, imie_rodzic_1_personel, imie_rodzic_2_personel, pesel_personel, opis_stanowiska_personel };
@@ -180,6 +180,11 @@ namespace Zadanie
                             MessageBox.Show("Aby być nauczycielem tego ośrodka wychowawczego trzeba mieć skończone conajmniej 18 lat");
                             czydodac = false;
                         }
+                        if (data_urodzenia_nauczyciel.SelectedDate.Value > data_zatrudnienia_nauczyciel.SelectedDate.Value)
+                        {
+                            MessageBox.Show("Osoba nie może być zatrudniona przed jej urodzeniem");
+                            czydodac = false;
+                        }
 
                         if (wychowawstwo_nauczyciel.IsChecked.Value)
                         {
@@ -245,6 +250,11 @@ namespace Zadanie
                         if (data_urodzenia_personel.SelectedDate.Value.AddYears(18) > DateTime.Now)
                         {
                             MessageBox.Show("Osoba musi być pełnoletnia");
+                            czydodac = false;
+                        }
+                        if (data_urodzenia_personel.SelectedDate.Value > data_zatrudnienia_personel.SelectedDate.Value)
+                        {
+                            MessageBox.Show("Osoba nie może być zatrudniona przed jej urodzeniem");
                             czydodac = false;
                         }
 
@@ -344,6 +354,8 @@ namespace Zadanie
                         datagrid_u.ItemsSource = null;
                         datagrid_u.ItemsSource = lista_u;
                         wyszukaj.Text = "";
+                        zablokowane.Visibility = Visibility.Hidden;
+                        datagrid_u.IsReadOnly = false;
                     }
                     break;
                 case "Nauczyciele":
@@ -353,6 +365,8 @@ namespace Zadanie
                         datagrid_n.ItemsSource = null;
                         datagrid_n.ItemsSource = lista_n;
                         wyszukaj.Text = "";
+                        zablokowane.Visibility = Visibility.Hidden;
+                        datagrid_n.IsReadOnly = false;
                     }
                     break;
                 case "Personel":
@@ -362,6 +376,8 @@ namespace Zadanie
                         datagrid_p.ItemsSource = null;
                         datagrid_p.ItemsSource = lista_p;
                         wyszukaj.Text = "";
+                        zablokowane.Visibility = Visibility.Hidden;
+                        datagrid_p.IsReadOnly = false;
                     }
                     break;
             }
@@ -585,6 +601,18 @@ namespace Zadanie
             switch (ti.Header)
             {
                 case "Uczniowie":
+
+                    if (wyszukaj.Text == "")
+                    {
+                        datagrid_u.ItemsSource = lista_u;
+                        zablokowane.Visibility = Visibility.Hidden;
+                    }
+                    else if (wyszukaj.Text !="")
+                    {
+                        zablokowane.Visibility = Visibility.Visible;
+                        datagrid_u.IsReadOnly = true;
+                    }
+
                     switch (cmbbx.Text)
                     {
                         case "Imie":
@@ -626,6 +654,18 @@ namespace Zadanie
                     }
                     break;
                 case "Nauczyciele":
+
+                    if (wyszukaj.Text == "")
+                    {
+                        datagrid_n.ItemsSource = lista_n;
+                        zablokowane.Visibility = Visibility.Hidden;
+                    }
+                    else if (wyszukaj.Text != "")
+                    {
+                        zablokowane.Visibility = Visibility.Visible;
+                        datagrid_n.IsReadOnly = true;
+                    }
+
                     switch (cmbbx.Text) 
                     {
                         case "Imie":
@@ -658,6 +698,18 @@ namespace Zadanie
                     }
                     break;
                 case "Personel":
+
+                    if (wyszukaj.Text == "")
+                    {
+                        datagrid_p.ItemsSource = lista_p;
+                        zablokowane.Visibility = Visibility.Hidden;
+                    }
+                    else if (wyszukaj.Text != "")
+                    {
+                        zablokowane.Visibility = Visibility.Visible;
+                        datagrid_p.IsReadOnly = true;
+                    }
+
                     switch (cmbbx.Text) 
                     {
                         case "Imie":
@@ -691,16 +743,7 @@ namespace Zadanie
                     break;
             }
 
-            if (wyszukaj.Text == "")
-            {
-                datagrid_u.ItemsSource = lista_u;
-                zablokowane.Visibility = Visibility.Hidden;
-            }
-            else if (wyszukaj.Text != "")
-            {
-                zablokowane.Visibility = Visibility.Visible;
-                datagrid_u.IsReadOnly = true;
-            }
+            
 
         }
 
