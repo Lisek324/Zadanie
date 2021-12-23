@@ -1,5 +1,5 @@
 ﻿/**
- * poprawienie wyszukiwarki
+ * Autor: Jakub Brzozowski
  */
 using System;
 using System.Collections.Generic;

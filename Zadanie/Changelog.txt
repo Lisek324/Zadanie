@@ -1,0 +1,112 @@
+16.11.2021r.
+
+-Storzono desing grarficzny 
+--------------------------
+27.11.2021r.
+
+Menu:
+	-Drobne poprawki w desinge
+	-Dodanie identyfikatorów do kontrolek
+
+W skrypcie:
+	-okno dialogowe pytające o potwierdzenie czy dodać do tabeli z aktualnej wyświetlanej zakładki
+	-małe rozplanowanie kodu (brak więszkej funkcjonalności)
+--------------------------
+29.11.2021r.
+
+Menu:
+	-Drobne poprawki w kontrolkach
+	-Dodanie identyfikatorów do kontrolek
+	-dodano funkcjię SelectedDateChanged
+
+W skrypcie:
+	-okno dialogowe mówiące o niedodanym rekordzie(tylko zakładka uczniowie)
+	-walidacjia daty zatrudnienia i daty urodzenia po zmianie daty dla nauczycieli i presonelu(wymaga poprawek)
+--------------------------
+30.11.2021r.
+	
+W skrypcie:
+	-dodano regex na pesel
+	-sprawdzanie czy wymagane pola są wypełnione, dla wszystkich zakładek
+	-poprawiono sparwdzanie daty urodzenia dla wszystkich zakładek
+
+Funkcjonalność:
+	wypełnione pola:
+	a)dla textboxów: sprawdza czy nie są puste
+	b)combobox: czy indeks nie jest równy 0
+	c)datepicker: czy wartość nie jest null
+	
+	regex - porównuje textbox z regex textboxem(możliwość wpisania tylko cyfr, maksymalna długość textboxa to 12 cyfr)
+
+	data urodzenia - w zależności od wybranej zakładki sprawdza wiek czy:
+		a)dana osoba nie urodzi się "jutro"
+		b)uczeń musi mieć skończone 6 lat 
+		c)nauczyciel i personel mają skończone po 18 lat
+
+	Jeśli warunek if bedzie prawdziwy dla niewypełnionych pól, zmienna czydodac zmieni się na false. Jeśli czydodac jest true, BĘDZIE dodawać rekordy do tabeli.
+
+--------------------------
+2.12.2021r.
+
+Design:
+	-poprawiono rozciąganie się kolumn, usunięto zbędne formatowanie z stackpaneli 
+	-poprawiono drobnie wygląd datagridów
+	-usunięto przyciski (Buttony) sortujące
+Skrypt:
+	-dodano dodawanie rekordów do datagrid dla wszystkich zakładek
+	-poprawiono warunek na dodawanie wierszy 
+	-usunięto wydarzenie selecteddatechanged event z datapickerów
+	-dodano usówanie wierszy
+Funkcjonalność:
+	a)Usuwanie zaznaczonych rekordów, jeśli nie ma zaznaczonego rekordu, program wyświetla okno informacyjne o braku zaznaczonych wierszach
+	b)warunek 'czydodac'sprawdza czy wymagane pola są uzupełnione, jeśli nie, okno informacyjne pojawia się o niewybranych, nieuzupełnionych polach
+--------------------------
+3.12.2021r.
+Skryp:
+	-dodano eksportowanie do pliku txt (tylko dla uczniów)
+Funkjonalność:
+	-po zaznaczeniu wierszy w tabeli/datagrid jest możliwość eksportowania do pliku txt(okno dialogowe nie posiada filtrów)
+--------------------------
+4.12.2021r.
+Skrypt:
+	-dodano prototyp skryptu importowania do datagrid(tylko uczniowie, tylko imie i drugie imie)
+Funkcjonalność:
+	-importuje z pliku txt wartości i wpisuje je do datagrid
+--------------------------
+6.12.2021r.
+Skrypt:
+	-zminiono typy zmiennych w klasach
+	-poprawiono wyświetlanie się zaznaczonej płci z formularza
+	-poprawiono wyświetlanie się dat w tabelach
+	-poprawiono usuwanie wierszy(możliwość usunięcia więcej niż jednego)
+	-dodano importowanie z pliku tekstowego dla wszystkich zakładek
+	-dodano eksportowanie do pliku tekstowego dla wszystkich zakładek
+	-dodano prototyp skryptu dodawania zdjęć do datagrid(tylko uczniowie)
+Funkcjonalność:
+	-Importowanie, eksportowanie do pliku txt z aktualnie wyświetlanej zakładki(aby wyeksportować rekordy, trzeba je zaznaczyć)
+	-Możliwość dodawania zdjęcia do datagrid, tylko dla uczniów
+--------------------------
+11.12.2021r.
+Skrypt:
+	-zmnieniono sposób dodawania rekordów poprzez listę
+	-dodawanie zdjecia dla wszystkich zakładek
+	-dodano warunek czy zdjecie zostało przesłane
+	-usuwanie rekordów wymaga poprawki
+Funkcjonalność:
+	-Istnieje możliwość edytowania rekordów w datagrid
+	-Dodaje zdjęcia do datagrid(wraz ze ścieżką w osobnej kolumnie czego nie chcę)
+--------------------------
+12.12.2021r
+Skrypt:
+	-dodano nowy skrypt wyszukiwartki(wciąż prototyp)
+	-naprawiono przycisk do usuwania
+	-dodano przycisk informacyjny(pokazuje ogólne informacjie o programie)'
+	-poprawiono wyświetlanie się wychowawstwa
+	
+Beta:
+	-zatrudniono pierwszych betatesterów
+---------------------------
+22.12.2021 r.
+Wniki testów:
+	betatester 1: Wpisywanie wieku w zakładce personel albo w nauczyciel, istnieje możliwość zaznaczenia że ktoś się urodził w np. 2000 a pracuje od 1980 (NAPRAWIONO)
+	betatester 2: Napis "Edytowanie wierszy zablokowano" wyświetlał się po usunięciu rekordów, oraz brak możliwości edytowania wierszy (NAPRAWIONO)
