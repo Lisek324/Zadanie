@@ -1,1 +1,1 @@
-W folderze Zadaanie znajduje się plik changelog.txt
+W folderze Zadanie znajduje się plik changelog.txt
